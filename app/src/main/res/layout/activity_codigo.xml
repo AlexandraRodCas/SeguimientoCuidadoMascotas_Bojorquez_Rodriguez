@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".CodigoActivity">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@color/beige">
 
         <ImageView
@@ -56,7 +57,7 @@
             android:id="@+id/et_codigo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/rounded_corner"
             android:ems="10"
@@ -73,7 +74,7 @@
 
     <Button
         android:id="@+id/btn_reenviar"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
@@ -84,8 +85,8 @@
 
     <Button
         android:id="@+id/btn_cotinuar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
         android:text="@string/botonCuenta"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"

@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".NuevacontrasenaActivity">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:background="@color/beige">
 
         <ImageView
@@ -44,36 +45,67 @@
         android:layout_marginHorizontal="20dp"
         android:textSize="20dp" />
 
-    <EditText
-        android:id="@+id/et_contrasena1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@drawable/rounded_corner"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dp"
-        android:hint="Contraseña"/>
+        android:paddingBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="30dp">
 
-    <EditText
-        android:id="@+id/et_contrasena"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
+        <EditText
+            android:id="@+id/et_contrasena1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/rounded_corner"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:hint="Contraseña"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/rosaPastel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@drawable/rounded_corner"
-        android:ems="10"
-        android:gravity="center_horizontal"
-        android:paddingTop="10dp"
-        android:hint="Repite contraseña"/>
+        android:paddingBottom="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="30dp">
+
+        <EditText
+            android:id="@+id/et_contrasena2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/rounded_corner"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:hint="Repetir contraseña"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/rosaPastel" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_confirmar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
         android:text="Confirmar"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
