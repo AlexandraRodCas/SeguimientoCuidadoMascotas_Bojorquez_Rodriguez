@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Seguimiento de Mascotas</string>
+    <string name="botonCuenta">Continuar</string>
+    <string name="contraOlvidada">Introduczca el correo o número telefonico ligado a la cuenta</string>
+    <string name="contraOlvidadaT">¿Olvidaste tu contraseña?</string>
+    <string name="codigo">Introduzca el código que le hemos enviado</string>
+</resources>
