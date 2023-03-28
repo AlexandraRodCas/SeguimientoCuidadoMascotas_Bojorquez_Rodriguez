@@ -12,6 +12,36 @@
         android:theme="@style/Theme.SeguimientoCuidadoMascotas"
         tools:targetApi="31">
         <activity
+            android:name=".pesito.PesodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".temp.TemperaturadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".temp.MedicionMTempActivity"
+            android:exported="false" />
+        <activity
+            android:name=".temp.ComoTempActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frecres.ComoRespActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frecres.RespiradActivity"
+            android:exported="false" />
+        <activity
+            android:name=".freccard.ComoCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".frecres.MedicionMRespActivity"
+            android:exported="false" />
+        <activity
+            android:name=".freccard.MedicionmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".freccard.CardiacadActivity"
+            android:exported="false" />
+        <activity
             android:name=".InfogenActivity"
             android:exported="false" />
         <activity
@@ -30,16 +60,16 @@
             android:name=".DuenoperfilActivity"
             android:exported="false" />
         <activity
-            android:name=".NuevacontrasenaActivity"
+            android:name=".login.NuevacontrasenaActivity"
             android:exported="false" />
         <activity
-            android:name=".CodigoActivity"
+            android:name=".login.CodigoActivity"
             android:exported="false" />
         <activity
-            android:name=".ContrasenaActivity"
+            android:name=".login.ContrasenaActivity"
             android:exported="false" />
         <activity
-            android:name=".CrearcuentaActivity"
+            android:name=".login.CrearcuentaActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

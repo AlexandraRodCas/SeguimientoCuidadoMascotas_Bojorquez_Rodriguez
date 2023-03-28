@@ -1,10 +1,13 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
+import alexandra.rodriguez.seguimientocuidadomascotas.freccard.CardiacadActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.pesito.PesodActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,16 +40,16 @@ class SignosvActivity : AppCompatActivity() {
         cargarBotones()
         adapter = AdaptadorBotonesS(this, botonesMenuSignos)
 
-        var gridPelis: GridView = findViewById(R.id.mascotasBotonesS)
+        var gridBotones: GridView = findViewById(R.id.mascotasBotonesS)
 
-        gridPelis.adapter = adapter
+        gridBotones.adapter = adapter
     }
 
     fun cargarBotones(){
-        botonesMenuSignos.add(BotonesMenu("Signos vitales", R.drawable.frecuenciacardiaca, mascota))
-        botonesMenuSignos.add(BotonesMenu("Comportamiento", R.drawable.comportamiento, mascota))
-        botonesMenuSignos.add(BotonesMenu("Historial Clinico", R.drawable.historial, mascota))
-        botonesMenuSignos.add(BotonesMenu("Información General", R.drawable.informacion, mascota))
+        botonesMenuSignos.add(BotonesMenu("Frecuencia cardiaca", R.drawable.frecuenciacardiaca, mascota))
+        botonesMenuSignos.add(BotonesMenu("Frecuencia respiratoria", R.drawable.frecuenciarespiratoria, mascota))
+        botonesMenuSignos.add(BotonesMenu("Temperatura", R.drawable.temperatura, mascota))
+        botonesMenuSignos.add(BotonesMenu("Peso", R.drawable.peso, mascota))
     }
 
     class AdaptadorBotonesS: BaseAdapter {
@@ -83,22 +86,33 @@ class SignosvActivity : AppCompatActivity() {
             nombre.setText(boton.name)
 
             shape.setOnClickListener{
-                var intento = Intent(contexto, MascotasperfilActivity::class.java)
 
-                if(boton.name.equals("Signos vitales")){
-                    var intento = Intent(contexto, SignosvActivity::class.java)
+                if(boton.name.equals("Frecuencia cardiaca")){
+                    var intentoC = Intent(contexto, CardiacadActivity::class.java)
+                    intentoC.putExtra("nombre",  boton.mascota.nombre)
+                    intentoC.putExtra("image",  boton.mascota.image)
+                    intentoC.putExtra("edad", boton.mascota.edad)
+                    contexto!!.startActivity(intentoC)
+                }
+                if(boton.name.equals("Frecuencia respiratoria")){
+                    var intento = Intent(contexto, RespiradActivity::class.java)
+                    intento.putExtra("nombre",  boton.mascota.nombre)
+                    intento.putExtra("image",  boton.mascota.image)
+                    intento.putExtra("edad", boton.mascota.edad)
                     contexto!!.startActivity(intento)
                 }
-                if(boton.name.equals("Comportamiento")){
-                    var intento = Intent(contexto, ComportActivity::class.java)
+                if(boton.name.equals("Temperatura")){
+                    var intento = Intent(contexto, TemperaturadActivity::class.java)
+                    intento.putExtra("nombre",  boton.mascota.nombre)
+                    intento.putExtra("image",  boton.mascota.image)
+                    intento.putExtra("edad", boton.mascota.edad)
                     contexto!!.startActivity(intento)
                 }
-                if(boton.name.equals("Historial Clinico")){
-                    var intento = Intent(contexto, HistorialcActivity::class.java)
-                    contexto!!.startActivity(intento)
-                }
-                if(boton.name.equals("Información General")){
-                    var intento = Intent(contexto, InfogenActivity::class.java)
+                if(boton.name.equals("Peso")){
+                    var intento = Intent(contexto, PesodActivity::class.java)
+                    intento.putExtra("nombre",  boton.mascota.nombre)
+                    intento.putExtra("image",  boton.mascota.image)
+                    intento.putExtra("edad", boton.mascota.edad)
                     contexto!!.startActivity(intento)
                 }
             }

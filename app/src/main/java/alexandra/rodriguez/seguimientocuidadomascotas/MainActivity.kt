@@ -1,5 +1,7 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
+import alexandra.rodriguez.seguimientocuidadomascotas.login.ContrasenaActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.login.CrearcuentaActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

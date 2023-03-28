@@ -8,11 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
     <color name="moradoPastel">#D0AAD1</color>
     <color name="Salmon">#E7A69B</color>
     <color name="rosaPastel">#F2AAAE</color>
     <color name="azulPastel">#D0E9E9</color>
-    <color name="verde">#F7E2BB</color>
+    <color name="verde">#A0CD68</color>
     <color name="beige">#ECDCD2</color>
     <color name="amarillo">#F7E2BB</color>
     <color name="crema">#FFE7C1</color>
