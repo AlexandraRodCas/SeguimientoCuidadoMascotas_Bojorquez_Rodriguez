@@ -1,6 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.historial
 
-import VacunasMuestra
+import alexandra.rodriguez.seguimientocuidadomascotas.VacunasMuestra
 import alexandra.rodriguez.seguimientocuidadomascotas.HistorialcActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
 import alexandra.rodriguez.seguimientocuidadomascotas.R
@@ -68,10 +68,14 @@ class PadecimientosActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
-        botonesMenuV.add(VacunasMuestra("Disnea",
-            R.drawable.padecimientos,"3 de enero 2022", mascota))
-        botonesMenuV.add(VacunasMuestra("Anorexia canina parcial",
-            R.drawable.padecimientos,"4 de novimebre 20224", mascota))
+        botonesMenuV.add(
+            VacunasMuestra("Disnea",
+            R.drawable.padecimientos,"3 de enero 2022", mascota)
+        )
+        botonesMenuV.add(
+            VacunasMuestra("Anorexia canina parcial",
+            R.drawable.padecimientos,"4 de novimebre 20224", mascota)
+        )
     }
 
     class AdaptadorPadecimientos: BaseAdapter {

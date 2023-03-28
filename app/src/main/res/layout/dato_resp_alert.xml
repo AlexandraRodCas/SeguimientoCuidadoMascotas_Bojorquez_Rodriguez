@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingTop="35dp"
-        android:inputType="number"
-        android:text="38,0c"
+        android:text="15xmin"
         android:textColor="@color/black"
         android:textSize="25dp" />
 
@@ -40,7 +39,7 @@
             android:paddingTop="35dp"
             android:layout_marginLeft="5dp"
             android:inputType="number"
-            android:hint="38"
+            android:hint="10"
             android:textColor="@color/black"
             android:textSize="15dp" />
         <EditText
@@ -50,7 +49,7 @@
             android:gravity="center"
             android:paddingTop="35dp"
             android:inputType="number"
-            android:hint=".0"
+            android:hint="5"
             android:textColor="@color/black"
             android:textSize="15dp" />
 
@@ -101,5 +100,4 @@
             android:textSize="15dp" />
 
     </LinearLayout>
-
 </LinearLayout>

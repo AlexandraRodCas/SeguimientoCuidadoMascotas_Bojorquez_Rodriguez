@@ -38,6 +38,7 @@
             android:gravity="center"
             android:paddingTop="35dp"
             android:layout_marginLeft="5dp"
+            android:inputType="number"
             android:hint="2"
             android:textColor="@color/black"
             android:textSize="15dp" />
@@ -48,6 +49,7 @@
             android:gravity="center"
             android:paddingTop="35dp"
             android:hint=".7"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textSize="15dp" />
 

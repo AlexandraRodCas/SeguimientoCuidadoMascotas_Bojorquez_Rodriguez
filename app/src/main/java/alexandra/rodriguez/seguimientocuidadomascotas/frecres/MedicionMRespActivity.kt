@@ -50,7 +50,7 @@ class MedicionMRespActivity : AppCompatActivity() {
         }
         btn_añadir.setOnClickListener {
             val builder = AlertDialog.Builder(this@MedicionMRespActivity)
-            val view = layoutInflater.inflate(R.layout.dato_cardiaca_alert, null)
+            val view = layoutInflater.inflate(R.layout.dato_resp_alert, null)
 
 
             builder.setView(view)

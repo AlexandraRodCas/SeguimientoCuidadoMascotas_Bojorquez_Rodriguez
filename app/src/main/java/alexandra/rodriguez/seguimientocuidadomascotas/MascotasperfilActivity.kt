@@ -13,7 +13,7 @@ import org.w3c.dom.Text
 
 class MascotasperfilActivity : AppCompatActivity() {
     var botonesMenuPerfilM=ArrayList<BotonesMenu>()
-    var adapter:AdaptadorBotones? =null
+    var adapter:BotonesAdaptador? =null
     lateinit var mascota: Mascota
 
 
@@ -35,7 +35,7 @@ class MascotasperfilActivity : AppCompatActivity() {
             mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
         }
         cargarBotones()
-        adapter = AdaptadorBotones(this, botonesMenuPerfilM)
+        adapter = BotonesAdaptador(this, botonesMenuPerfilM)
 
         var gridPelis: GridView = findViewById(R.id.mascotasBotones)
 
@@ -49,70 +49,4 @@ class MascotasperfilActivity : AppCompatActivity() {
         botonesMenuPerfilM.add(BotonesMenu("Información General", R.drawable.informacion, mascota))
     }
 
-     class AdaptadorBotones: BaseAdapter {
-        var botones = ArrayList<BotonesMenu>()
-        var contexto: Context? = null
-
-        constructor(contexto: Context, productos:ArrayList<BotonesMenu>){
-            this.botones = productos
-            this.contexto = contexto
-        }
-
-        override fun getCount(): Int {
-            return botones.size
-        }
-
-        override fun getItem(p0: Int): Any {
-            return botones[p0]
-        }
-
-        override fun getItemId(p0: Int): Long {
-            return p0.toLong()
-        }
-
-        override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-            var boton=botones[p0]
-            var inflador= LayoutInflater.from(contexto)
-            var vista = inflador.inflate(R.layout.cell_perfil, null)
-
-            val imagen = vista.findViewById(R.id.icono) as ImageView
-            val nombre = vista.findViewById(R.id.item) as TextView
-            val shape  = vista.findViewById(R.id.shape) as LinearLayout
-
-            imagen.setImageResource(boton.image)
-            nombre.setText(boton.name)
-
-            shape.setOnClickListener{
-                if(boton.name.equals("Signos vitales")){
-                    var intento = Intent(contexto, SignosvActivity::class.java)
-                    intento.putExtra("nombre",  boton.mascota.nombre)
-                    intento.putExtra("image",  boton.mascota.image)
-                    intento.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intento)
-                }
-                if(boton.name.equals("Comportamiento")){
-                    var intento = Intent(contexto, ComportActivity::class.java)
-                    intento.putExtra("nombre",  boton.mascota.nombre)
-                    intento.putExtra("image",  boton.mascota.image)
-                    intento.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intento)
-                }
-                if(boton.name.equals("Historial Clinico")){
-                    var intento = Intent(contexto, HistorialcActivity::class.java)
-                    intento.putExtra("nombre",  boton.mascota.nombre)
-                    intento.putExtra("image",  boton.mascota.image)
-                    intento.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intento)
-                }
-                if(boton.name.equals("Información General")){
-                    var intento = Intent(contexto, InfogenActivity::class.java)
-                    intento.putExtra("nombre",  boton.mascota.nombre)
-                    intento.putExtra("image",  boton.mascota.image)
-                    intento.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intento)
-                }
-            }
-            return vista
-        }
-    }
 }

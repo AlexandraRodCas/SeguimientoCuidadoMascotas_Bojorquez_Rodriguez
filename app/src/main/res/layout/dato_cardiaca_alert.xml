@@ -39,6 +39,7 @@
             android:paddingTop="35dp"
             android:layout_marginLeft="5dp"
             android:hint="100"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textSize="15dp" />
         <EditText
@@ -48,6 +49,7 @@
             android:gravity="center"
             android:paddingTop="35dp"
             android:hint="0"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textSize="15dp" />
 

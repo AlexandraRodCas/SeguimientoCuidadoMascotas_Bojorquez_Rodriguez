@@ -1,6 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.historial
 
-import VacunasMuestra
+import alexandra.rodriguez.seguimientocuidadomascotas.VacunasMuestra
 import alexandra.rodriguez.seguimientocuidadomascotas.HistorialcActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
 import alexandra.rodriguez.seguimientocuidadomascotas.R
@@ -58,14 +58,22 @@ class EnfermedadesActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
-        botonesMenuV.add(VacunasMuestra("Conjuntivitis",
-            R.drawable.enfermedades,"27 febrero 2023 - 10 marzo 2014", mascota))
-        botonesMenuV.add(VacunasMuestra("Diarrea",
-            R.drawable.enfermedades,"20 enero 2023 - 22 enero 2014", mascota))
-        botonesMenuV.add(VacunasMuestra("Alergia cutanea",
-            R.drawable.enfermedades,"10 octubre 2022 - 15 octubre 2014", mascota))
-        botonesMenuV.add(VacunasMuestra("Intoxicación alimentaria",
-            R.drawable.enfermedades,"20 agosto 2022 - 22 agosto 2014", mascota))
+        botonesMenuV.add(
+            VacunasMuestra("Conjuntivitis",
+            R.drawable.enfermedades,"27 febrero 2023 - 10 marzo 2014", mascota)
+        )
+        botonesMenuV.add(
+            VacunasMuestra("Diarrea",
+            R.drawable.enfermedades,"20 enero 2023 - 22 enero 2014", mascota)
+        )
+        botonesMenuV.add(
+            VacunasMuestra("Alergia cutanea",
+            R.drawable.enfermedades,"10 octubre 2022 - 15 octubre 2014", mascota)
+        )
+        botonesMenuV.add(
+            VacunasMuestra("Intoxicación alimentaria",
+            R.drawable.enfermedades,"20 agosto 2022 - 22 agosto 2014", mascota)
+        )
     }
 
     class AdaptadorEnfermedades: BaseAdapter {

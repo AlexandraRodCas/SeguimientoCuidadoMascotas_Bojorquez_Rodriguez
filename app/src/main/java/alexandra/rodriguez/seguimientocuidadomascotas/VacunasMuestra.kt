@@ -1,3 +1,5 @@
+package alexandra.rodriguez.seguimientocuidadomascotas
+
 import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
 
 data class VacunasMuestra (var name:String,
