@@ -1,7 +1,8 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.historial.EnfermedadesActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.historial.PadecimientosActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.historial.VacunasActivity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -43,8 +44,8 @@ class HistorialcActivity : AppCompatActivity() {
 
     fun cargarBotones(){
         botonesMenuSignosH.add(BotonesMenu("Vacunación", R.drawable.vacuna_icono, mascota))
-        botonesMenuSignosH.add(BotonesMenu("Padecimientos", R.drawable.frecuenciarespiratoria, mascota))
-        botonesMenuSignosH.add(BotonesMenu("Enfermedades", R.drawable.temperatura, mascota))
+        botonesMenuSignosH.add(BotonesMenu("Padecimientos", R.drawable.padecimientos, mascota))
+        botonesMenuSignosH.add(BotonesMenu("Enfermedades", R.drawable.enfermedades, mascota))
     }
 
     class AdaptadorBotonesH: BaseAdapter {
@@ -90,14 +91,14 @@ class HistorialcActivity : AppCompatActivity() {
                     contexto!!.startActivity(intentoC)
                 }
                 if(boton.name.equals("Padecimientos")){
-                    var intento = Intent(contexto, RespiradActivity::class.java)
+                    var intento = Intent(contexto, PadecimientosActivity::class.java)
                     intento.putExtra("nombre",  boton.mascota.nombre)
                     intento.putExtra("image",  boton.mascota.image)
                     intento.putExtra("edad", boton.mascota.edad)
                     contexto!!.startActivity(intento)
                 }
                 if(boton.name.equals("Enfermedades")){
-                    var intento = Intent(contexto, TemperaturadActivity::class.java)
+                    var intento = Intent(contexto, EnfermedadesActivity::class.java)
                     intento.putExtra("nombre",  boton.mascota.nombre)
                     intento.putExtra("image",  boton.mascota.image)
                     intento.putExtra("edad", boton.mascota.edad)

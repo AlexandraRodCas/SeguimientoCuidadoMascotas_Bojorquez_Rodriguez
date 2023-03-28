@@ -1,9 +1,9 @@
-package alexandra.rodriguez.seguimientocuidadomascotas
+package alexandra.rodriguez.seguimientocuidadomascotas.historial
 
 import VacunasMuestra
-import alexandra.rodriguez.seguimientocuidadomascotas.freccard.CardiacadActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.HistorialcActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
+import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -55,10 +55,14 @@ class VacunasActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
-        botonesMenuV.add(VacunasMuestra("Puppy", R.drawable.vacuna_icono,"1 de febrero de 2014", mascota))
-        botonesMenuV.add(VacunasMuestra("Polivalente", R.drawable.vacuna_icono,"20 de febrero de 2014", mascota))
-        botonesMenuV.add(VacunasMuestra("Antirrabica", R.drawable.vacuna_icono,"25 de febrero de 2014", mascota))
-        botonesMenuV.add(VacunasMuestra("Leishmaniosis", R.drawable.vacuna_icono,"25 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Puppy",
+            R.drawable.vacuna_icono,"1 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Polivalente",
+            R.drawable.vacuna_icono,"20 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Antirrabica",
+            R.drawable.vacuna_icono,"25 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Leishmaniosis",
+            R.drawable.vacuna_icono,"25 de febrero de 2014", mascota))
     }
 
     class AdaptadorVacunas: BaseAdapter {
