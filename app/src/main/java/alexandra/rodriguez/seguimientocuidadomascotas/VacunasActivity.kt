@@ -1,5 +1,7 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
+import VacunasMuestra
+import alexandra.rodriguez.seguimientocuidadomascotas.freccard.CardiacadActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
 import android.content.Context
@@ -11,14 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 
-class HistorialcActivity : AppCompatActivity() {
-    var botonesMenuSignosH=ArrayList<BotonesMenu>()
-    var adapter: AdaptadorBotonesH? =null
+class VacunasActivity : AppCompatActivity() {
+    var botonesMenuV=ArrayList<VacunasMuestra>()
+    var adapter: AdaptadorVacunas? =null
     lateinit var mascota: Mascota
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_historialc)
+        setContentView(R.layout.activity_vacunas)
         val bundle = intent.extras
+
+        val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         if(bundle != null){
 
@@ -34,24 +39,33 @@ class HistorialcActivity : AppCompatActivity() {
         }
 
         cargarBotones()
-        adapter = AdaptadorBotonesH(this, botonesMenuSignosH)
+        adapter = AdaptadorVacunas(this, botonesMenuV)
 
-        var gridBotones: GridView = findViewById(R.id.mascotasBotonesH)
+        var gridBotones: GridView = findViewById(R.id.mascotasVacunas) as GridView
 
         gridBotones.adapter = adapter
+
+        btn_back.setOnClickListener {
+            var intento = Intent(this, HistorialcActivity::class.java)
+            intento.putExtra("nombre",  mascota.nombre)
+            intento.putExtra("image",  mascota.image)
+            intento.putExtra("edad", mascota.edad)
+            this.startActivity(intento)
+        }
     }
 
     fun cargarBotones(){
-        botonesMenuSignosH.add(BotonesMenu("Vacunación", R.drawable.vacuna_icono, mascota))
-        botonesMenuSignosH.add(BotonesMenu("Padecimientos", R.drawable.frecuenciarespiratoria, mascota))
-        botonesMenuSignosH.add(BotonesMenu("Enfermedades", R.drawable.temperatura, mascota))
+        botonesMenuV.add(VacunasMuestra("Puppy", R.drawable.vacuna_icono,"1 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Polivalente", R.drawable.vacuna_icono,"20 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Antirrabica", R.drawable.vacuna_icono,"25 de febrero de 2014", mascota))
+        botonesMenuV.add(VacunasMuestra("Leishmaniosis", R.drawable.vacuna_icono,"25 de febrero de 2014", mascota))
     }
 
-    class AdaptadorBotonesH: BaseAdapter {
-        var botones = ArrayList<BotonesMenu>()
+    class AdaptadorVacunas: BaseAdapter {
+        var botones = ArrayList<VacunasMuestra>()
         var contexto: Context? = null
 
-        constructor(contexto: Context, productos:ArrayList<BotonesMenu>){
+        constructor(contexto: Context, productos:ArrayList<VacunasMuestra>){
             this.botones = productos
             this.contexto = contexto
         }
@@ -75,36 +89,13 @@ class HistorialcActivity : AppCompatActivity() {
 
             val imagen = vista.findViewById(R.id.icono) as ImageView
             val nombre = vista.findViewById(R.id.item) as TextView
-            val shape  = vista.findViewById(R.id.shape) as LinearLayout
+            val fecha  = vista.findViewById(R.id.item2) as TextView
 
             imagen.setImageResource(boton.image)
             nombre.setText(boton.name)
+            fecha.setText(boton.fecha)
 
-            shape.setOnClickListener{
 
-                if(boton.name.equals("Vacunación")){
-                    var intentoC = Intent(contexto, VacunasActivity::class.java)
-                    intentoC.putExtra("nombre",  boton.mascota.nombre)
-                    intentoC.putExtra("image",  boton.mascota.image)
-                    intentoC.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intentoC)
-                }
-                if(boton.name.equals("Padecimientos")){
-                    var intento = Intent(contexto, RespiradActivity::class.java)
-                    intento.putExtra("nombre",  boton.mascota.nombre)
-                    intento.putExtra("image",  boton.mascota.image)
-                    intento.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intento)
-                }
-                if(boton.name.equals("Enfermedades")){
-                    var intento = Intent(contexto, TemperaturadActivity::class.java)
-                    intento.putExtra("nombre",  boton.mascota.nombre)
-                    intento.putExtra("image",  boton.mascota.image)
-                    intento.putExtra("edad", boton.mascota.edad)
-                    contexto!!.startActivity(intento)
-                }
-
-            }
             return vista
         }
     }

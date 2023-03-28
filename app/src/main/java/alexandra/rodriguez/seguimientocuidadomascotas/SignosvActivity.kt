@@ -23,6 +23,7 @@ class SignosvActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signosv)
 
         val bundle = intent.extras
+        val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         if(bundle != null){
 
@@ -43,6 +44,14 @@ class SignosvActivity : AppCompatActivity() {
         var gridBotones: GridView = findViewById(R.id.mascotasBotonesS)
 
         gridBotones.adapter = adapter
+
+        btn_back.setOnClickListener {
+            var intento = Intent(this, MascotasperfilActivity::class.java)
+            intento.putExtra("nombre",  mascota.nombre)
+            intento.putExtra("image",  mascota.image)
+            intento.putExtra("edad", mascota.edad)
+            this.startActivity(intento)
+        }
     }
 
     fun cargarBotones(){
