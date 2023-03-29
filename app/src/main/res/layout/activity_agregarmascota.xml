@@ -301,20 +301,23 @@
                     android:layout_marginHorizontal="15dp"
                     android:background="@color/rosaPastel" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_continuar"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/azulPastel"
+                android:radius="8dp"
+                android:text="Continuar"
+                android:textColor="@color/black" />
+
+
         </LinearLayout>
 
     </ScrollView>
 
 
-    <Button
-        android:id="@+id/btn_continuar"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/azulPastel"
-        android:radius="8dp"
-        android:text="Continuar"
-        android:textColor="@color/black" />
 
 </LinearLayout>
