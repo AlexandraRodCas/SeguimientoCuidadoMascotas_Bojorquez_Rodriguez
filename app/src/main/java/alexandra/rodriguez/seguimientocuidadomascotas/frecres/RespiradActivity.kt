@@ -54,9 +54,8 @@ class RespiradActivity : AppCompatActivity() {
         }
     }
     fun cargarDatos(){
-        botonesMenuSignosH.add(Datos("Frecuencia Reposo", "95LMP", mascota))
-        botonesMenuSignosH.add(Datos("Ritmo promedio", "105LMP", mascota))
-        botonesMenuSignosH.add(Datos("Ritmo máximo", "140LMP", mascota))
-        botonesMenuSignosH.add(Datos("Ritmo minimo", "90LMP", mascota))
+        botonesMenuSignosH.add(Datos("Frecuencia Reposo", "15xmin", mascota))
+        botonesMenuSignosH.add(Datos("Frecuencia máximo", "19xmin", mascota))
+        botonesMenuSignosH.add(Datos("Frecuencia minimo", "10xmin", mascota))
     }
 }

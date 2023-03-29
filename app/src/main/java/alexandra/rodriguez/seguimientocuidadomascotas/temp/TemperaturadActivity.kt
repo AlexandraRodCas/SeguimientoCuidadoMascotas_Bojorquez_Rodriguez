@@ -35,7 +35,7 @@ class TemperaturadActivity : AppCompatActivity() {
         adapter = DatosAdaptador(this, botonesMenuSignosH)
 
         var gridBotones: GridView = findViewById(R.id.gridCardiaca)
-
+        gridBotones.adapter = adapter
 
         btn_back.setOnClickListener {
             var intento = Intent(this, SignosvActivity::class.java)

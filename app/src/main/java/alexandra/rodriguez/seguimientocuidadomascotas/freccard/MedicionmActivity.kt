@@ -1,19 +1,21 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.freccard
 
-import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
-import alexandra.rodriguez.seguimientocuidadomascotas.R
-import alexandra.rodriguez.seguimientocuidadomascotas.SignosvActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.*
+import alexandra.rodriguez.seguimientocuidadomascotas.temp.MedicionMTempActivity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 
 class MedicionmActivity : AppCompatActivity() {
+    var datoManual=ArrayList<Manual>()
+    var adapter: ManualAdaptador? =null
     lateinit var mascota: Mascota
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,11 +28,16 @@ class MedicionmActivity : AppCompatActivity() {
         if(bundle != null){
 
             val nombreM: TextView = findViewById(R.id.nombreMas)
-            Log.d("NOMBRE", bundle.getString("nombre").toString())
             nombreM.setText(bundle.getString("nombre").toString())
 
             mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
         }
+
+        cargarDatos()
+        adapter = ManualAdaptador(this, datoManual)
+
+        var gridBotones: GridView = findViewById(R.id.gridCardiaca)
+        gridBotones.adapter = adapter
 
         btn_back.setOnClickListener {
             var intento = Intent(this, CardiacadActivity::class.java)
@@ -39,7 +46,6 @@ class MedicionmActivity : AppCompatActivity() {
             intento.putExtra("edad", mascota.edad)
             this.startActivity(intento)
         }
-
         btn_comoMedir.setOnClickListener {
             var intento = Intent(this, ComoCardActivity::class.java)
             intento.putExtra("nombre",  mascota.nombre)
@@ -69,5 +75,50 @@ class MedicionmActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    fun cargarDatos(){
+        datoManual.add(Manual("9 de marzo", "100LPM - 7:45am", "115LPM - 1:10pm", "98LPM - 7:00pm"))
+        datoManual.add(Manual("8 de marzo", "104LPM - 8:00am", "120LPM - 2:00pm", "97LPM - 7:30pm"))
+    }
+
+    class ManualAdaptador : BaseAdapter {
+        var botones = ArrayList<Manual>()
+        var contexto: Context? = null
+
+        constructor(contexto: Context, productos: ArrayList<Manual>) {
+            this.botones = productos
+            this.contexto = contexto
+        }
+
+        override fun getCount(): Int {
+            return botones.size
+        }
+
+        override fun getItem(p0: Int): Any {
+            return botones[p0]
+        }
+
+        override fun getItemId(p0: Int): Long {
+            return p0.toLong()
+        }
+
+        override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
+            var boton = botones[p0]
+            var inflador = LayoutInflater.from(contexto)
+            var vista = inflador.inflate(R.layout.cell_freccar, null)
+
+            val fecha = vista.findViewById(R.id.fecha) as TextView
+            val nombre = vista.findViewById(R.id.frec) as TextView
+            val frec2 = vista.findViewById(R.id.frec2) as TextView
+            val frec3= vista.findViewById(R.id.frec3) as TextView
+
+            fecha.setText(boton.fecha)
+            nombre.setText(boton.dialogo1)
+            frec2.setText(boton.dialogo2)
+            frec3.setText(boton.dialogo3)
+
+            return vista
+        }
     }
 }
