@@ -12,6 +12,15 @@
         android:theme="@style/Theme.SeguimientoCuidadoMascotas"
         tools:targetApi="31">
         <activity
+            android:name=".AgregarmascotaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EspecieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NuevapetActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
