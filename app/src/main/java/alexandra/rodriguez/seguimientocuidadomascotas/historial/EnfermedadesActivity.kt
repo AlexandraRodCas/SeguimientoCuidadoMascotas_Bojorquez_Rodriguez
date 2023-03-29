@@ -1,9 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.historial
 
-import alexandra.rodriguez.seguimientocuidadomascotas.VacunasMuestra
-import alexandra.rodriguez.seguimientocuidadomascotas.HistorialcActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
-import alexandra.rodriguez.seguimientocuidadomascotas.R
+import alexandra.rodriguez.seguimientocuidadomascotas.*
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.GridView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 
 class EnfermedadesActivity : AppCompatActivity() {
     var botonesMenuV=ArrayList<VacunasMuestra>()
@@ -27,6 +21,7 @@ class EnfermedadesActivity : AppCompatActivity() {
         val bundle = intent.extras
 
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
+        val btn_añadir: Button = findViewById(R.id.btn_añadir) as Button
 
         if(bundle != null){
 
@@ -50,6 +45,14 @@ class EnfermedadesActivity : AppCompatActivity() {
 
         btn_back.setOnClickListener {
             var intento = Intent(this, HistorialcActivity::class.java)
+            intento.putExtra("nombre",  mascota.nombre)
+            intento.putExtra("image",  mascota.image)
+            intento.putExtra("edad", mascota.edad)
+            this.startActivity(intento)
+        }
+
+        btn_añadir.setOnClickListener {
+            var intento = Intent(this, AgregarvacunaActivity::class.java)
             intento.putExtra("nombre",  mascota.nombre)
             intento.putExtra("image",  mascota.image)
             intento.putExtra("edad", mascota.edad)

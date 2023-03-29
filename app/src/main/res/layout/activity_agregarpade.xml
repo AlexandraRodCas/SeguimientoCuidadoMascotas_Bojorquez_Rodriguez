@@ -57,7 +57,7 @@
             android:id="@+id/et_correo_telefono"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/rounded_menu"
             android:ems="10"

@@ -1,9 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.historial
 
-import alexandra.rodriguez.seguimientocuidadomascotas.VacunasMuestra
-import alexandra.rodriguez.seguimientocuidadomascotas.HistorialcActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
-import alexandra.rodriguez.seguimientocuidadomascotas.R
+import alexandra.rodriguez.seguimientocuidadomascotas.*
 import alexandra.rodriguez.seguimientocuidadomascotas.adapters.VacunasAdaptador
 import android.content.Context
 import android.content.Intent
@@ -25,6 +22,7 @@ class VacunasActivity : AppCompatActivity() {
         val bundle = intent.extras
 
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
+        val btn_añadir: Button = findViewById(R.id.btn_añadir) as Button
 
         if(bundle != null){
 
@@ -48,6 +46,14 @@ class VacunasActivity : AppCompatActivity() {
 
         btn_back.setOnClickListener {
             var intento = Intent(this, HistorialcActivity::class.java)
+            intento.putExtra("nombre",  mascota.nombre)
+            intento.putExtra("image",  mascota.image)
+            intento.putExtra("edad", mascota.edad)
+            this.startActivity(intento)
+        }
+
+        btn_añadir.setOnClickListener {
+            var intento = Intent(this, AgregarvacunaActivity::class.java)
             intento.putExtra("nombre",  mascota.nombre)
             intento.putExtra("image",  mascota.image)
             intento.putExtra("edad", mascota.edad)
