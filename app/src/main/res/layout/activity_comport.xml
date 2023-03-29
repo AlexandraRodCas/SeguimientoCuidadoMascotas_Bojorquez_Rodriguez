@@ -55,7 +55,7 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         android:layout_marginBottom="20dp"
-        android:text="9 años"/>
+        android:text="Comportamiento"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="5dp"
@@ -80,6 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Apetito"
+                    android:paddingTop="5dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:textSize="15dp"/>
@@ -107,20 +108,9 @@
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
-                    <RadioButton
-                        android:layout_width="@dimen/radioButton"
-                        android:layout_height="@dimen/radioButton"
-                        android:textAlignment="center"
-                        android:layout_marginHorizontal="@dimen/rbhm"
-                        android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button = "@drawable/apmucho"
+                        android:padding="20dp"
+                        android:background="@drawable/circle_background" />
 
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
@@ -128,26 +118,34 @@
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/apregular"
+                        android:background="@drawable/circle_background" />
+
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
                         android:layout_height="@dimen/radioButton"
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/appoco"
+                        android:background="@drawable/circle_background" />
+
+                    <RadioButton
+                        android:layout_width="@dimen/radioButton"
+                        android:layout_height="@dimen/radioButton"
+                        android:textAlignment="center"
+                        android:layout_marginHorizontal="@dimen/rbhm"
+                        android:textColor="@color/black"
+                        android:button="@drawable/apnada"
+                        android:background="@drawable/circle_background" />
+
                 </RadioGroup>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -160,21 +158,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="49dp"
+                        android:layout_marginLeft="30dp"
                         android:textSize="15dp"
                         android:text="Regular"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="48dp"
+                        android:layout_marginLeft="33dp"
                         android:textSize="15dp"
                         android:text="Poco"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="45dp"
+                        android:layout_marginLeft="35dp"
                         android:textSize="15dp"
                         android:text="Ninguno"/>
                 </LinearLayout>
@@ -192,6 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sueño"
+                    android:paddingTop="5dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:textSize="15dp"/>
@@ -207,7 +206,6 @@
                     android:id="@+id/Sueño"
                     android:layout_width="wrap_content"
                     android:layout_height="70dp"
-                    android:paddingHorizontal="@dimen/hpRadioGroup"
                     android:orientation="horizontal"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp">
@@ -218,20 +216,17 @@
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/zmucho"
+                        android:paddingLeft="30dp"
+                        android:background="@drawable/circle_background" />
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
                         android:layout_height="@dimen/radioButton"
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/zregular"
+                        android:background="@drawable/circle_background" />
 
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
@@ -239,26 +234,25 @@
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/zpoco"
+                        android:background="@drawable/circle_background"/>
+
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
                         android:layout_height="@dimen/radioButton"
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/znada"
+                        android:background="@drawable/circle_background" />
+
                 </RadioGroup>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -271,21 +265,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="49dp"
+                        android:layout_marginLeft="30dp"
                         android:textSize="15dp"
                         android:text="Regular"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="48dp"
+                        android:layout_marginLeft="30dp"
                         android:textSize="15dp"
                         android:text="Poco"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="45dp"
+                        android:layout_marginLeft="35dp"
                         android:textSize="15dp"
                         android:text="Ninguno"/>
                 </LinearLayout>
@@ -303,6 +297,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Estado de animo"
+                    android:paddingTop="5dp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="10dp"
                     android:textSize="15dp"/>
@@ -329,20 +324,16 @@
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/alegre"
+                        android:background="@drawable/circle_background" />
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
                         android:layout_height="@dimen/radioButton"
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/triste"
+                        android:background="@drawable/circle_background" />
 
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
@@ -350,55 +341,52 @@
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/enojado"
+                        android:background="@drawable/circle_background" />
                     <RadioButton
                         android:layout_width="@dimen/radioButton"
                         android:layout_height="@dimen/radioButton"
                         android:textAlignment="center"
                         android:layout_marginHorizontal="@dimen/rbhm"
                         android:textColor="@color/black"
-                        android:button="@android:color/transparent"
-                        android:background="@drawable/circle_background"
-                        android:textSize="@dimen/radioButtonText"
-                        android:textStyle="bold"/>
+                        android:button="@drawable/aburrido"
+                        android:background="@drawable/circle_background" />
                 </RadioGroup>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="35dp"
+                        android:layout_marginLeft="30dp"
                         android:textSize="15dp"
-                        android:text="Mucho"/>
+                        android:text="Alegre"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="49dp"
+                        android:layout_marginLeft="39dp"
                         android:textSize="15dp"
-                        android:text="Regular"/>
+                        android:text="Triste"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="48dp"
+                        android:layout_marginLeft="37dp"
                         android:textSize="15dp"
-                        android:text="Poco"/>
+                        android:text="Enojado"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="45dp"
+                        android:layout_marginLeft="25dp"
                         android:textSize="15dp"
-                        android:text="Ninguno"/>
+                        android:text="Aburrido"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -415,6 +403,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ladridos"
+                android:paddingTop="5dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="10dp"
                 android:textSize="15dp"/>
@@ -442,20 +431,16 @@
                     android:textAlignment="center"
                     android:layout_marginHorizontal="@dimen/rbhm"
                     android:textColor="@color/black"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/circle_background"
-                    android:textSize="@dimen/radioButtonText"
-                    android:textStyle="bold"/>
+                    android:button="@drawable/lamucho"
+                    android:background="@drawable/circle_background" />
                 <RadioButton
                     android:layout_width="@dimen/radioButton"
                     android:layout_height="@dimen/radioButton"
                     android:textAlignment="center"
                     android:layout_marginHorizontal="@dimen/rbhm"
                     android:textColor="@color/black"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/circle_background"
-                    android:textSize="@dimen/radioButtonText"
-                    android:textStyle="bold"/>
+                    android:button="@drawable/laregular"
+                    android:background="@drawable/circle_background" />
 
                 <RadioButton
                     android:layout_width="@dimen/radioButton"
@@ -463,53 +448,50 @@
                     android:textAlignment="center"
                     android:layout_marginHorizontal="@dimen/rbhm"
                     android:textColor="@color/black"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/circle_background"
-                    android:textSize="@dimen/radioButtonText"
-                    android:textStyle="bold"/>
+                    android:button="@drawable/lapoco"
+                    android:background="@drawable/circle_background" />
                 <RadioButton
                     android:layout_width="@dimen/radioButton"
                     android:layout_height="@dimen/radioButton"
                     android:textAlignment="center"
                     android:layout_marginHorizontal="@dimen/rbhm"
                     android:textColor="@color/black"
-                    android:button="@android:color/transparent"
-                    android:background="@drawable/circle_background"
-                    android:textSize="@dimen/radioButtonText"
-                    android:textStyle="bold"/>
+                    android:button="@drawable/lanada"
+                    android:background="@drawable/circle_background" />
             </RadioGroup>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="30dp"
                     android:textSize="15dp"
                     android:text="Mucho"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="49dp"
+                    android:layout_marginLeft="37dp"
                     android:textSize="15dp"
                     android:text="Regular"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="48dp"
+                    android:layout_marginLeft="37dp"
                     android:textSize="15dp"
                     android:text="Poco"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:layout_marginLeft="45dp"
+                    android:layout_marginLeft="34dp"
                     android:textSize="15dp"
                     android:text="Ninguno"/>
             </LinearLayout>
