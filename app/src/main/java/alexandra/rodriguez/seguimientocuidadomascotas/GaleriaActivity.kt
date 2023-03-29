@@ -1,6 +1,5 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,30 +7,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.GridView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 
-class VeterinariaActivity : AppCompatActivity() {
+class GaleriaActivity : AppCompatActivity() {
     var botonesMenuInfo=ArrayList<VacunasMuestra>()
-    var adapter: VeterinariasAdaptador? =null
+    var adapter: FotosAdaptador? =null
     lateinit var mascota: Mascota
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_veterinaria)
-        val bundle = intent.extras
+        setContentView(R.layout.activity_galeria)
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
+        val bundle = intent.extras
         if(bundle != null){
+
             mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
         }
 
         cargarBotones()
-        adapter = VeterinariasAdaptador(this, botonesMenuInfo)
+        adapter = FotosAdaptador(this, botonesMenuInfo)
 
-        var gridBotones: GridView = findViewById(R.id.mascotasBotonesIn)
+        var gridBotones: GridView = findViewById(R.id.gridGaleria)
 
         gridBotones.adapter = adapter
 
@@ -43,18 +40,22 @@ class VeterinariaActivity : AppCompatActivity() {
             this.startActivity(intento)
         }
     }
-
     fun cargarBotones(){
-        botonesMenuInfo.add(VacunasMuestra("Clinica Vet. Medicans", R.drawable.medicans,"Ignacio Ramirez 198 3, Ciudad Obregón, México\n644 412 9000", mascota))
-        botonesMenuInfo.add(VacunasMuestra("Hospital veterinario\nDr Hiram.", R.drawable.hiram,"C. Coahuila 173 Norte, Centro, 85000 Cd Obregón\n644 415 0715", mascota))
-        botonesMenuInfo.add(VacunasMuestra("ALPHA PETH", R.drawable.alpha,"Jesus Garcia #2210A, Ciudad Obregón, México\n644 412 0882", mascota))
-        botonesMenuInfo.add(VacunasMuestra("El ranchero", R.drawable.none, "C California 293, Centro, 85000 Cd Obregón\n644 413 8847",mascota))
-        botonesMenuInfo.add(VacunasMuestra("D'Knes", R.drawable.none, "C Quintana Roo 702, Noroeste, 85100 Cd Obregón\n644 416 1611",mascota))
-        botonesMenuInfo.add(VacunasMuestra("Pets Blue Home", R.drawable.petsblue, "Avenida Vicente Guerrero, Cd Obregón\n644 415 8960",mascota))
-        botonesMenuInfo.add(VacunasMuestra("Pets & Grooming", R.drawable.pyg, "Tetabiate #307, Ciudad Obregón, México\n644 414 7534",mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto1,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto2,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto3,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto3,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto5,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto6,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto7,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto8,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto9,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto10,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto11,"", mascota))
+        botonesMenuInfo.add(VacunasMuestra("", R.drawable.foto12,"", mascota))
     }
 
-    class VeterinariasAdaptador: BaseAdapter {
+    class FotosAdaptador: BaseAdapter {
         var botones = ArrayList<VacunasMuestra>()
         var contexto: Context? = null
 
@@ -78,15 +79,11 @@ class VeterinariaActivity : AppCompatActivity() {
         override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
             var boton=botones[p0]
             var inflador= LayoutInflater.from(contexto)
-            var vista = inflador.inflate(R.layout.cell_veterinarias, null)
+            var vista = inflador.inflate(R.layout.cell_foto, null)
 
             val imagen = vista.findViewById(R.id.icono) as ImageView
-            val nombre = vista.findViewById(R.id.item) as TextView
-            val direccion = vista.findViewById(R.id.item2) as TextView
 
-            nombre.setText(boton.name)
             imagen.setImageResource(boton.image)
-            direccion.setText(boton.fecha)
 
             return vista
         }

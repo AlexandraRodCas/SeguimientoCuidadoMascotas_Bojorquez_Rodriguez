@@ -20,4 +20,8 @@
     <string name="tempP2">Aplica vaselina del tamaño de un guisante en el extremo del termometro e introducelo en el recto (una pulgada es suficiente). Espera el pitido del termometro</string>
     <string name="link">Link a un video explicativo</string>
 
+    <string name="msj1">Revisemos el avance de Timón durante el último mes</string>
+    <string name="msj2">¡De acuerdo!</string>
+    <string name="msj3">Durante el último mes Timón asistió a su cita de control. mantuvo un ritmo promedio de 110LPM, una frecuencia de respiración de 15xmin, su comportamiento fue habitual con un aumento de aperiro que se vio reflejado en aumentar 0.2Kg de peso, acercandose así a la meta propuesta del mes</string>
+
 </resources>

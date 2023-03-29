@@ -1,6 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.VacunasAdaptador
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,30 +8,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.GridView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import kotlin.time.days
 
-class VeterinariaActivity : AppCompatActivity() {
+class CalendarioActivity : AppCompatActivity() {
     var botonesMenuInfo=ArrayList<VacunasMuestra>()
     var adapter: VeterinariasAdaptador? =null
     lateinit var mascota: Mascota
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_veterinaria)
-        val bundle = intent.extras
+        setContentView(R.layout.activity_calendario)
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
+        val calendarView: CalendarView = findViewById(R.id.calendarView) as CalendarView
 
+        val bundle = intent.extras
         if(bundle != null){
+
             mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
         }
 
         cargarBotones()
         adapter = VeterinariasAdaptador(this, botonesMenuInfo)
 
-        var gridBotones: GridView = findViewById(R.id.mascotasBotonesIn)
+        var gridBotones: GridView = findViewById(R.id.gridGaleria)
 
         gridBotones.adapter = adapter
 
@@ -42,16 +42,12 @@ class VeterinariaActivity : AppCompatActivity() {
             intento.putExtra("edad", mascota.edad)
             this.startActivity(intento)
         }
-    }
 
+
+    }
     fun cargarBotones(){
-        botonesMenuInfo.add(VacunasMuestra("Clinica Vet. Medicans", R.drawable.medicans,"Ignacio Ramirez 198 3, Ciudad Obregón, México\n644 412 9000", mascota))
-        botonesMenuInfo.add(VacunasMuestra("Hospital veterinario\nDr Hiram.", R.drawable.hiram,"C. Coahuila 173 Norte, Centro, 85000 Cd Obregón\n644 415 0715", mascota))
-        botonesMenuInfo.add(VacunasMuestra("ALPHA PETH", R.drawable.alpha,"Jesus Garcia #2210A, Ciudad Obregón, México\n644 412 0882", mascota))
-        botonesMenuInfo.add(VacunasMuestra("El ranchero", R.drawable.none, "C California 293, Centro, 85000 Cd Obregón\n644 413 8847",mascota))
-        botonesMenuInfo.add(VacunasMuestra("D'Knes", R.drawable.none, "C Quintana Roo 702, Noroeste, 85100 Cd Obregón\n644 416 1611",mascota))
-        botonesMenuInfo.add(VacunasMuestra("Pets Blue Home", R.drawable.petsblue, "Avenida Vicente Guerrero, Cd Obregón\n644 415 8960",mascota))
-        botonesMenuInfo.add(VacunasMuestra("Pets & Grooming", R.drawable.pyg, "Tetabiate #307, Ciudad Obregón, México\n644 414 7534",mascota))
+        botonesMenuInfo.add(VacunasMuestra("Timón", R.drawable.timon,"Consulta de control\n25 de marzo, 3:40pm", mascota))
+        botonesMenuInfo.add(VacunasMuestra("Odin", R.drawable.odin,"Consulta de control\n31 de marzo, 5:40pm", mascota))
     }
 
     class VeterinariasAdaptador: BaseAdapter {

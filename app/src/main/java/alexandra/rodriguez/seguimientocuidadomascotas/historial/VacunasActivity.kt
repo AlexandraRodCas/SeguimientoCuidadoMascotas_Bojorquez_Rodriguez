@@ -4,6 +4,7 @@ import alexandra.rodriguez.seguimientocuidadomascotas.VacunasMuestra
 import alexandra.rodriguez.seguimientocuidadomascotas.HistorialcActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
 import alexandra.rodriguez.seguimientocuidadomascotas.R
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.VacunasAdaptador
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,7 @@ import android.widget.*
 
 class VacunasActivity : AppCompatActivity() {
     var botonesMenuV=ArrayList<VacunasMuestra>()
-    var adapter: AdaptadorVacunas? =null
+    var adapter: VacunasAdaptador? =null
     lateinit var mascota: Mascota
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,7 @@ class VacunasActivity : AppCompatActivity() {
         }
 
         cargarBotones()
-        adapter = AdaptadorVacunas(this, botonesMenuV)
+        adapter = VacunasAdaptador(this, botonesMenuV)
 
         var gridBotones: GridView = findViewById(R.id.mascotasVacunas) as GridView
 
@@ -71,44 +72,5 @@ class VacunasActivity : AppCompatActivity() {
             VacunasMuestra("Leishmaniosis",
             R.drawable.vacuna_icono,"25 de febrero de 2014", mascota)
         )
-    }
-
-    class AdaptadorVacunas: BaseAdapter {
-        var botones = ArrayList<VacunasMuestra>()
-        var contexto: Context? = null
-
-        constructor(contexto: Context, productos:ArrayList<VacunasMuestra>){
-            this.botones = productos
-            this.contexto = contexto
-        }
-
-        override fun getCount(): Int {
-            return botones.size
-        }
-
-        override fun getItem(p0: Int): Any {
-            return botones[p0]
-        }
-
-        override fun getItemId(p0: Int): Long {
-            return p0.toLong()
-        }
-
-        override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-            var boton=botones[p0]
-            var inflador= LayoutInflater.from(contexto)
-            var vista = inflador.inflate(R.layout.cell_perfil, null)
-
-            val imagen = vista.findViewById(R.id.icono) as ImageView
-            val nombre = vista.findViewById(R.id.item) as TextView
-            val fecha  = vista.findViewById(R.id.item2) as TextView
-
-            imagen.setImageResource(boton.image)
-            nombre.setText(boton.name)
-            fecha.setText(boton.fecha)
-
-
-            return vista
-        }
     }
 }

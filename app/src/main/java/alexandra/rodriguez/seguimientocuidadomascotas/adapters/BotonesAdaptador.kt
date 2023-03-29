@@ -10,6 +10,7 @@ import alexandra.rodriguez.seguimientocuidadomascotas.pesito.PesodActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class BotonesAdaptador: BaseAdapter {
         nombre.setText(boton.name)
 
         shape.setOnClickListener{
+            Log.d("BOTON", boton.name.toString())
 
             if(boton.name.equals("Signos vitales")){
                 var intento = Intent(contexto, SignosvActivity::class.java)
@@ -111,42 +113,6 @@ class BotonesAdaptador: BaseAdapter {
                 contexto!!.startActivity(intento)
             }
 
-            if(boton.name.equals("Artículos")){
-                var intentoC = Intent(contexto, VacunasActivity::class.java)
-                intentoC.putExtra("nombre",  boton.mascota.nombre)
-                intentoC.putExtra("image",  boton.mascota.image)
-                intentoC.putExtra("edad", boton.mascota.edad)
-                contexto!!.startActivity(intentoC)
-            }
-            if(boton.name.equals("Galeria")){
-                var intento = Intent(contexto, PadecimientosActivity::class.java)
-                intento.putExtra("nombre",  boton.mascota.nombre)
-                intento.putExtra("image",  boton.mascota.image)
-                intento.putExtra("edad", boton.mascota.edad)
-                contexto!!.startActivity(intento)
-            }
-            if(boton.name.equals("Gastos")){
-                var intento = Intent(contexto, EnfermedadesActivity::class.java)
-                intento.putExtra("nombre",  boton.mascota.nombre)
-                intento.putExtra("image",  boton.mascota.image)
-                intento.putExtra("edad", boton.mascota.edad)
-                contexto!!.startActivity(intento)
-            }
-            if(boton.name.equals("Calendario")){
-                var intento = Intent(contexto, PadecimientosActivity::class.java)
-                intento.putExtra("nombre",  boton.mascota.nombre)
-                intento.putExtra("image",  boton.mascota.image)
-                intento.putExtra("edad", boton.mascota.edad)
-                contexto!!.startActivity(intento)
-            }
-            if(boton.name.equals("Directorio veterinarios")){
-                var intento = Intent(contexto, EnfermedadesActivity::class.java)
-                intento.putExtra("nombre",  boton.mascota.nombre)
-                intento.putExtra("image",  boton.mascota.image)
-                intento.putExtra("edad", boton.mascota.edad)
-                contexto!!.startActivity(intento)
-            }
-
             if(boton.name.equals("Vacunación")){
                 var intentoC = Intent(contexto, VacunasActivity::class.java)
                 intentoC.putExtra("nombre",  boton.mascota.nombre)
@@ -171,6 +137,38 @@ class BotonesAdaptador: BaseAdapter {
 
             if(boton.name.equals("Directorio veterinarios")){
                 var intento = Intent(contexto, VeterinariaActivity::class.java)
+                intento.putExtra("nombre",  boton.mascota.nombre)
+                intento.putExtra("image",  boton.mascota.image)
+                intento.putExtra("edad", boton.mascota.edad)
+                contexto!!.startActivity(intento)
+            }
+
+            if(boton.name.equals("Artículos")){
+                var intento = Intent(contexto, ArticulosActivity::class.java)
+                intento.putExtra("nombre",  boton.mascota.nombre)
+                intento.putExtra("image",  boton.mascota.image)
+                intento.putExtra("edad", boton.mascota.edad)
+                contexto!!.startActivity(intento)
+            }
+
+            if(boton.name.equals("Galeria")){
+                var intento = Intent(contexto, GaleriaActivity::class.java)
+                intento.putExtra("nombre",  boton.mascota.nombre)
+                intento.putExtra("image",  boton.mascota.image)
+                intento.putExtra("edad", boton.mascota.edad)
+                contexto!!.startActivity(intento)
+            }
+
+            if(boton.name.equals("Gastos")){
+                var intento = Intent(contexto, GastosActivity::class.java)
+                intento.putExtra("nombre",  boton.mascota.nombre)
+                intento.putExtra("image",  boton.mascota.image)
+                intento.putExtra("edad", boton.mascota.edad)
+                contexto!!.startActivity(intento)
+            }
+
+            if(boton.name.equals("Calendario")){
+                var intento = Intent(contexto, CalendarioActivity::class.java)
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)

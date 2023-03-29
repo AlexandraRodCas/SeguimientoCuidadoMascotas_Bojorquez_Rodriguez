@@ -1,6 +1,7 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
 import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -34,6 +35,16 @@ class MascotasperfilActivity : AppCompatActivity() {
         var gridPelis: GridView = findViewById(R.id.mascotasBotones)
 
         gridPelis.adapter = adapter
+
+        val btn_menu: ImageView = findViewById(R.id.menu) as ImageView
+
+        btn_menu.setOnClickListener {
+            var intento = Intent(this, MenuActivity::class.java)
+            intento.putExtra("nombre",  mascota.nombre)
+            intento.putExtra("image",  mascota.image)
+            intento.putExtra("edad", mascota.edad)
+            this.startActivity(intento)
+        }
     }
 
     fun cargarBotones(){

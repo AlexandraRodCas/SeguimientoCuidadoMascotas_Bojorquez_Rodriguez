@@ -74,7 +74,7 @@
         android:layout_height="5dp"
         android:background="@color/Salmon" />
 
-            <LinearLayout
+    <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -100,7 +100,7 @@
                     android:background="@color/rosaPastel" />
             </LinearLayout>
 
-            <LinearLayout
+    <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -128,7 +128,7 @@
                     android:background="@color/rosaPastel" />
             </LinearLayout>
 
-            <LinearLayout
+    <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -155,7 +155,7 @@
                     android:background="@color/rosaPastel" />
             </LinearLayout>
 
-            <LinearLayout
+    <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

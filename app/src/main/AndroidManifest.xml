@@ -12,6 +12,30 @@
         android:theme="@style/Theme.SeguimientoCuidadoMascotas"
         tools:targetApi="31">
         <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregagastActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DesarrolloActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GaleriaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CalendarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GastosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticulosActivity"
+            android:exported="false" />
+        <activity
             android:name=".VeterinariaActivity"
             android:exported="false" />
         <activity
