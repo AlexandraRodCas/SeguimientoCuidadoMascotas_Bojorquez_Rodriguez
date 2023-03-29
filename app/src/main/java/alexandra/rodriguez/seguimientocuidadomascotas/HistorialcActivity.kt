@@ -1,15 +1,8 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.historial.EnfermedadesActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.historial.PadecimientosActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.historial.VacunasActivity
-import android.content.Context
-import android.content.Intent
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 
 class HistorialcActivity : AppCompatActivity() {

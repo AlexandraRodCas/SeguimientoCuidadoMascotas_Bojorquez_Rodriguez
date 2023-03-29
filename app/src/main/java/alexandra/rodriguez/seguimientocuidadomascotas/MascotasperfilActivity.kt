@@ -1,19 +1,13 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import android.content.Context
-import android.content.Intent
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-import org.w3c.dom.Text
 
 class MascotasperfilActivity : AppCompatActivity() {
     var botonesMenuPerfilM=ArrayList<BotonesMenu>()
-    var adapter:BotonesAdaptador? =null
+    var adapter: BotonesAdaptador? =null
     lateinit var mascota: Mascota
 
 

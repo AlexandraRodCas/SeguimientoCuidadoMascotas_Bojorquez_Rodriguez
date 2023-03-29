@@ -1,15 +1,8 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.historial.EnfermedadesActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.historial.PadecimientosActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.historial.VacunasActivity
-import android.content.Context
-import android.content.Intent
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 
 class InfogenActivity : AppCompatActivity() {
@@ -34,12 +27,11 @@ class InfogenActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
-        botonesMenuInfo.add(BotonesMenu("Artículos", R.drawable.vacuna_icono, mascota))
-        botonesMenuInfo.add(BotonesMenu("Galeria", R.drawable.padecimientos, mascota))
-        botonesMenuInfo.add(BotonesMenu("Gastos", R.drawable.enfermedades, mascota))
-        botonesMenuInfo.add(BotonesMenu("Calendario", R.drawable.padecimientos, mascota))
-        botonesMenuInfo.add(BotonesMenu("Directorio veterinarios", R.drawable.enfermedades, mascota))
+        botonesMenuInfo.add(BotonesMenu("Artículos", R.drawable.articulo, mascota))
+        botonesMenuInfo.add(BotonesMenu("Galeria", R.drawable.galeria, mascota))
+        botonesMenuInfo.add(BotonesMenu("Gastos", R.drawable.presupuesto, mascota))
+        botonesMenuInfo.add(BotonesMenu("Calendario", R.drawable.calendario, mascota))
+        botonesMenuInfo.add(BotonesMenu("Directorio veterinarios", R.drawable.directorio, mascota))
     }
-
 
 }

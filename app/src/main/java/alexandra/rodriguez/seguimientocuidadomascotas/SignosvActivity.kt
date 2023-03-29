@@ -1,16 +1,9 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.freccard.CardiacadActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.pesito.PesodActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
-import android.content.Context
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 
 class SignosvActivity : AppCompatActivity() {

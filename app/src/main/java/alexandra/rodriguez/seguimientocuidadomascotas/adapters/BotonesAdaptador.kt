@@ -1,5 +1,6 @@
-package alexandra.rodriguez.seguimientocuidadomascotas
+package alexandra.rodriguez.seguimientocuidadomascotas.adapters
 
+import alexandra.rodriguez.seguimientocuidadomascotas.*
 import alexandra.rodriguez.seguimientocuidadomascotas.freccard.CardiacadActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.historial.EnfermedadesActivity
@@ -162,6 +163,14 @@ class BotonesAdaptador: BaseAdapter {
             }
             if(boton.name.equals("Enfermedades")){
                 var intento = Intent(contexto, EnfermedadesActivity::class.java)
+                intento.putExtra("nombre",  boton.mascota.nombre)
+                intento.putExtra("image",  boton.mascota.image)
+                intento.putExtra("edad", boton.mascota.edad)
+                contexto!!.startActivity(intento)
+            }
+
+            if(boton.name.equals("Directorio veterinarios")){
+                var intento = Intent(contexto, VeterinariaActivity::class.java)
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)

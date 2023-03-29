@@ -1,12 +1,12 @@
-package alexandra.rodriguez.seguimientocuidadomascotas
+package alexandra.rodriguez.seguimientocuidadomascotas.adapters
 
+import alexandra.rodriguez.seguimientocuidadomascotas.Datos
+import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 
 class DatosAdaptador: BaseAdapter {

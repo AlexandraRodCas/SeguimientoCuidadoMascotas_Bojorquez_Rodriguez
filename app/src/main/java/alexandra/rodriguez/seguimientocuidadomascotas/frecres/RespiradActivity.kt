@@ -1,7 +1,7 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.frecres
 
 import alexandra.rodriguez.seguimientocuidadomascotas.*
-import alexandra.rodriguez.seguimientocuidadomascotas.freccard.MedicionmActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.DatosAdaptador
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
