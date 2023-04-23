@@ -126,6 +126,9 @@
             android:name=".login.CrearcuentaActivity"
             android:exported="false" />
         <activity
+            android:name=".login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -1,35 +1,31 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.login.ContrasenaActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.login.CrearcuentaActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.login.LoginActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
+import android.os.Handler
+import android.view.WindowManager
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_main)
-        actionBar?.hide()
-        val btn_registrarse: TextView = findViewById(R.id.tv_crearCuenta)
-        val btn_contra: TextView = findViewById(R.id.tv_olvidasteContra)
-        val btn_ingresar: Button = findViewById(R.id.btn_ingresar)
 
-        btn_registrarse.setOnClickListener{
-            val intentR: Intent = Intent(this, CrearcuentaActivity::class.java)
+        var animacionArriba:Animation = AnimationUtils.loadAnimation(this, R.anim.desplazamiento_arriba)
+
+        var logo: ImageView = findViewById(R.id.logoIV)
+
+        logo.setAnimation(animacionArriba)
+
+        Handler().postDelayed({
+            val intentR = Intent(this, LoginActivity::class.java)
             startActivity(intentR)
-        }
-
-        btn_contra.setOnClickListener{
-            val intentC: Intent = Intent(this, ContrasenaActivity::class.java)
-            startActivity(intentC)
-        }
-
-        btn_ingresar.setOnClickListener{
-            val intentI: Intent = Intent(this, DuenoperfilActivity::class.java)
-            startActivity(intentI)
-        }
+            finish()
+        }, 4000)
     }
 }

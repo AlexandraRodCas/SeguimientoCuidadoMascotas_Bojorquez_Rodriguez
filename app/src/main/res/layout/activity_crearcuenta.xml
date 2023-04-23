@@ -59,7 +59,7 @@
                 android:paddingBottom="15dp"
                 android:layout_marginTop="20dp">
                 <EditText
-                    android:id="@+id/et_nombre"
+                    android:id="@+id/et_nombreReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -85,7 +85,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/et_telefono"
+                    android:id="@+id/et_telefonoReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
@@ -112,7 +112,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/et_ciudad"
+                    android:id="@+id/et_ciudadReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
@@ -138,7 +138,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/et_estado"
+                    android:id="@+id/et_estadoReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_corner"
@@ -163,7 +163,7 @@
                 android:paddingBottom="15dp"
                 android:layout_marginTop="20dp">
                 <EditText
-                    android:id="@+id/et_pais"
+                    android:id="@+id/et_paisReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_corner"
@@ -189,7 +189,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/et_nacimiento"
+                    android:id="@+id/et_nacimientoReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_corner"
@@ -211,9 +211,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_corner"
-                android:paddingBottom="15dp">
+                android:paddingBottom="15dp"
+                android:layout_marginTop="20dp">
                 <EditText
-                    android:id="@+id/et_email"
+                    android:id="@+id/et_correoReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_corner"
@@ -239,7 +240,7 @@
                 android:layout_marginTop="20dp">
 
                 <EditText
-                    android:id="@+id/et_contra1"
+                    android:id="@+id/et_contraReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_corner"
@@ -265,7 +266,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp">
                 <EditText
-                    android:id="@+id/et_contra2"
+                    android:id="@+id/et_contra2Reg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_corner"
@@ -282,15 +283,18 @@
                     android:background="@color/rosaPastel" />
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btn_ingresarReg"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="@string/botonCuenta"
+                android:layout_gravity="center"
+                android:layout_marginVertical="20dp"
+                android:background="@drawable/rounded_button"
+                android:textColor="@color/black" />
+
         </LinearLayout>
+
     </ScrollView>
-    <Button
-        android:id="@+id/btn_ingresar"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:text="@string/botonCuenta"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_button"
-        android:textColor="@color/black" />
+
 </LinearLayout>
