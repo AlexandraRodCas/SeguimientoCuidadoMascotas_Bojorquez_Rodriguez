@@ -11,8 +11,12 @@ import android.widget.BaseAdapter
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class NuevapetActivity : AppCompatActivity() {
+    private lateinit var storage: FirebaseFirestore
+    private lateinit var usuario: FirebaseAuth
     var mascotasPerfilD=ArrayList<Mascota>()
     var adapter: AdaptadorMascotas? =null
 

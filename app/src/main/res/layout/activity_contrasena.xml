@@ -55,7 +55,7 @@
         android:layout_marginHorizontal="30dp">
 
         <EditText
-            android:id="@+id/et_correo_telefono"
+            android:id="@+id/et_correoOC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -64,7 +64,7 @@
             android:ems="10"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
-            android:hint="Correo/Núm de Telefono"/>
+            android:hint="Correo"/>
 
 
         <View

@@ -11,9 +11,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class CrearcuentaActivity : AppCompatActivity() {
+    private lateinit var storage: FirebaseFirestore
+    private lateinit var usuario: FirebaseAuth
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,12 +61,22 @@ class CrearcuentaActivity : AppCompatActivity() {
         var contra1: String = et_contra1.text.toString()
         var contra2: String = et_contra2.text.toString()
 
-        //if(!correo.isNullOrBlank() && !contra1.isNullOrBlank() && !nombre.isNullOrBlank() && !telefono.isNullOrBlank() && !ciudad.isNullOrBlank() &&
-          //  !contra2.isNullOrBlank() && !estado.isNullOrBlank() && !pais.isNullOrBlank() && !fecha_nacimiento.isNullOrBlank()){
-        if(!correo.isNullOrBlank() && !contra1.isNullOrBlank() && !contra2.isNullOrBlank()){
-            Log.d("EN IF VAIN", fecha_nacimiento)
+        storage = FirebaseFirestore.getInstance()
+        usuario = FirebaseAuth.getInstance()
+
+        if(!correo.isNullOrBlank() && !contra1.isNullOrBlank() && !nombre.isNullOrBlank() && !telefono.isNullOrBlank() && !ciudad.isNullOrBlank() &&
+            !contra2.isNullOrBlank() && !estado.isNullOrBlank() && !pais.isNullOrBlank() && !fecha_nacimiento.isNullOrBlank()){
             if(contra1.length>6 && contra2.length>6) {
                 if (contra1 == contra2) {
+                    storage.collection("usuarios").document(correo).set(
+                        hashMapOf("email" to correo, "nombre" to nombre, "telefono" to telefono,
+                            "ciudad" to ciudad, "estado" to estado, "pais" to pais, "fecha nacimiento" to fecha_nacimiento,
+                        "contraseña" to contra1)
+                    ).addOnSuccessListener {
+                        Toast.makeText(this, "Guardado con exito", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener{
+                        Toast.makeText(this, "Fallo al guardar"+it.toString(), Toast.LENGTH_SHORT).show()
+                    }
                     registrarFirebase(correo, contra1)
                 } else {
                     Toast.makeText(this, "Las contraseña no coinciden", Toast.LENGTH_SHORT).show()
@@ -86,6 +99,7 @@ class CrearcuentaActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     //Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+
 
                     Toast.makeText(baseContext, "${user?.email}se ha creado correctamente", Toast.LENGTH_SHORT).show()
 

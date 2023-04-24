@@ -7,8 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class NuevacontrasenaActivity : AppCompatActivity() {
+    private lateinit var storage: FirebaseFirestore
+    private lateinit var usuario: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nuevacontrasena)
@@ -21,8 +25,8 @@ class NuevacontrasenaActivity : AppCompatActivity() {
         }
 
         btn_confirmar.setOnClickListener {
-            var intento = Intent(this, MainActivity::class.java)
-            this.startActivity(intento)
+
+
         }
     }
 }

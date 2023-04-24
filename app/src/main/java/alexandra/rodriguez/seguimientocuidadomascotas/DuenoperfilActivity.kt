@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.GridView
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 
 class DuenoperfilActivity : AppCompatActivity() {
     var mascotasPerfilD=ArrayList<Mascota>()
@@ -29,8 +26,7 @@ class DuenoperfilActivity : AppCompatActivity() {
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         btn_back.setOnClickListener {
-            var intento = Intent(this, MainActivity::class.java)
-            this.startActivity(intento)
+            finish()
         }
     }
 

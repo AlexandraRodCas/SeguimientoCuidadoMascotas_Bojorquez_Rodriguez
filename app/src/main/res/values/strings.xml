@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Seguimiento de Mascotas</string>
     <string name="botonCuenta">Continuar</string>
-    <string name="contraOlvidada">Introduczca el correo o número telefonico ligado a la cuenta</string>
+    <string name="contraOlvidada">Introduczca el correo ligado a la cuenta</string>
     <string name="contraOlvidadaT">¿Olvidaste tu contraseña?</string>
     <string name="codigo">Introduzca el código que le hemos enviado</string>
 
@@ -23,5 +23,7 @@
     <string name="msj1">Revisemos el avance de Timón durante el último mes</string>
     <string name="msj2">¡De acuerdo!</string>
     <string name="msj3">Durante el último mes Timón asistió a su cita de control. mantuvo un ritmo promedio de 110LPM, una frecuencia de respiración de 15xmin, su comportamiento fue habitual con un aumento de aperiro que se vio reflejado en aumentar 0.2Kg de peso, acercandose así a la meta propuesta del mes</string>
+
+    <string name="server_client_id">770171692882-b07srtag8vtvfuhg3eh0ifaloqad8298.apps.googleusercontent.com</string>
 
 </resources>
