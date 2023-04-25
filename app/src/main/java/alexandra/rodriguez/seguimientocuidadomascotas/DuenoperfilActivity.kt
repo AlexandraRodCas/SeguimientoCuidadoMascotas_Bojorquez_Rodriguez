@@ -9,15 +9,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class DuenoperfilActivity : AppCompatActivity() {
-    var mascotasPerfilD=ArrayList<Mascota>()
+    private lateinit var storage: FirebaseFirestore
+    private lateinit var usuario: FirebaseAuth
     var adapter: AdaptadorMascotas? =null
+
+    companion object{
+        var mascotasPerfilD = ArrayList<Mascota>()
+        var first = true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_duenoperfil)
-        cargarBotones()
         adapter = AdaptadorMascotas(this, mascotasPerfilD)
+
+        storage = FirebaseFirestore.getInstance()
+        usuario = FirebaseAuth.getInstance()
+
+        if(first){
+            cargarBotones()
+            first = false
+        }
 
         var gridPelis: GridView = findViewById(R.id.mascotas)
 
@@ -31,10 +47,52 @@ class DuenoperfilActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
+        storage.collection("mascotas")
+            .whereEqualTo("email", usuario.currentUser?.email)
+            .get()
+            .addOnSuccessListener {
+                it.forEach{
+                    var  image:Int = 0
+                    if(it.getString("especie").equals("Felino")){
+                        image = R.drawable.cat
+                    }
+                    if(it.getString("especie").equals("Canino")){
+                        image = R.drawable.dog
+                    }
+                    if(it.getString("especie").equals("Ave")){
+                        image = R.drawable.bird
+                    }
+                    if(it.getString("especie").equals("Pez")){
+                        image = R.drawable.pez
+                    }
+                    if(it.getString("especie").equals("Reptil")){
+                        image = R.drawable.lizard
+                    }
+                    if(it.getString("especie").equals("Insecto")){
+                        image = R.drawable.insecto
+                    }
+
+                    var nombre:String = it.getString("nombreMascota").toString()
+                    var edadString = it.getString("fecha nacimiento").toString()
+
+
+                    var act = Mascota(nombre, image, edadString)
+
+                    mascotasPerfilD.add(act)
+
+                }
+
+
+            }
+
+            .addOnFailureListener{
+                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+        mascotasPerfilD.add(Mascota(" ", R.drawable.duda, "New Pet"))
         mascotasPerfilD.add(Mascota("Timon", R.drawable.timon, "9 años"))
         mascotasPerfilD.add(Mascota("Odin", R.drawable.odin, "6 años"))
         mascotasPerfilD.add(Mascota("Silver", R.drawable.silver, "2 años"))
-        mascotasPerfilD.add(Mascota(" ", R.drawable.duda, "New Pet"))
+
     }
 
     class AdaptadorMascotas: BaseAdapter {

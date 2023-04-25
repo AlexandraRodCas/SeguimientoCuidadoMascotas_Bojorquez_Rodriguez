@@ -26,9 +26,9 @@ class NuevapetActivity : AppCompatActivity() {
         cargarBotones()
         adapter = AdaptadorMascotas(this, mascotasPerfilD)
 
-        var gridPelis: GridView = findViewById(R.id.mascotas)
+        var gridMascotas: GridView = findViewById(R.id.mascotas)
 
-        gridPelis.adapter = adapter
+        gridMascotas.adapter = adapter
 
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
@@ -39,12 +39,12 @@ class NuevapetActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
-        mascotasPerfilD.add(Mascota("Canino", R.drawable.dog, "9 años"))
-        mascotasPerfilD.add(Mascota("Felino", R.drawable.cat, "6 años"))
-        mascotasPerfilD.add(Mascota("Ave", R.drawable.bird, "2 años"))
-        mascotasPerfilD.add(Mascota("Pez", R.drawable.pez, "New Pet"))
-        mascotasPerfilD.add(Mascota("Reptil", R.drawable.lizard, "2 años"))
-        mascotasPerfilD.add(Mascota("Insecto", R.drawable.insecto, "New Pet"))
+        mascotasPerfilD.add(Mascota("Canino", R.drawable.dog, ""))
+        mascotasPerfilD.add(Mascota("Felino", R.drawable.cat, ""))
+        mascotasPerfilD.add(Mascota("Ave", R.drawable.bird, ""))
+        mascotasPerfilD.add(Mascota("Pez", R.drawable.pez, ""))
+        mascotasPerfilD.add(Mascota("Reptil", R.drawable.lizard, ""))
+        mascotasPerfilD.add(Mascota("Insecto", R.drawable.insecto, ""))
     }
 
     class AdaptadorMascotas: BaseAdapter {
@@ -82,6 +82,7 @@ class NuevapetActivity : AppCompatActivity() {
             imagen.setOnClickListener {
                 var intento = Intent(contexto, AgregarmascotaActivity::class.java)
                 intento.putExtra("image", mascota.image)
+                intento.putExtra("especie", mascota.nombre)
                 contexto!!.startActivity(intento)
             }
 
