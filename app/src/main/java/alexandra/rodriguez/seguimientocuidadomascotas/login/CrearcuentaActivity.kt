@@ -2,22 +2,30 @@ package alexandra.rodriguez.seguimientocuidadomascotas.login
 
 import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDate
+import java.time.Period
 
 class CrearcuentaActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseFirestore
     private lateinit var usuario: FirebaseAuth
     private lateinit var auth: FirebaseAuth
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crearcuenta)
@@ -25,6 +33,36 @@ class CrearcuentaActivity : AppCompatActivity() {
 
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
         val btn_ingresar: Button = findViewById(R.id.btn_ingresarReg) as Button
+
+        val editText = findViewById<EditText>(R.id.et_nacimientoReg)
+        val editText2 = findViewById<EditText>(R.id.et_telefonoReg)
+        editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
+        editText2.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
+
+        editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No es necesario implementar este método
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Este método se llama cada vez que se cambia el texto del EditText
+                val text = s.toString()
+
+                if (text.length == 2 && before == 0) {
+                    // Si el usuario acaba de escribir el día, agregamos el primer '/'
+                    editText.setText("$text/")
+                    editText.setSelection(editText.text.length)
+                } else if (text.length == 5 && before == 0) {
+                    // Si el usuario acaba de escribir el mes, agregamos el segundo '/'
+                    editText.setText("$text/")
+                    editText.setSelection(editText.text.length)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No es necesario implementar este método
+            }
+        })
 
         btn_back.setOnClickListener {
             var intento = Intent(this, LoginActivity::class.java)
@@ -38,6 +76,7 @@ class CrearcuentaActivity : AppCompatActivity() {
 
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun valida_registro(){
         val et_ombre: EditText = findViewById(R.id.et_nombreReg)
         val et_telefono: EditText = findViewById(R.id.et_telefonoReg)
@@ -66,23 +105,26 @@ class CrearcuentaActivity : AppCompatActivity() {
 
         if(!correo.isNullOrBlank() && !contra1.isNullOrBlank() && !nombre.isNullOrBlank() && !telefono.isNullOrBlank() && !ciudad.isNullOrBlank() &&
             !contra2.isNullOrBlank() && !estado.isNullOrBlank() && !pais.isNullOrBlank() && !fecha_nacimiento.isNullOrBlank()){
-            if(contra1.length>6 && contra2.length>6) {
-                if (contra1 == contra2) {
-                    storage.collection("usuarios").document(correo).set(
-                        hashMapOf("email" to correo, "nombre" to nombre, "telefono" to telefono,
-                            "ciudad" to ciudad, "estado" to estado, "pais" to pais, "fecha nacimiento" to fecha_nacimiento,
-                        "contraseña" to contra1)
-                    ).addOnSuccessListener {
-                        Toast.makeText(this, "Guardado con exito", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener{
-                        Toast.makeText(this, "Fallo al guardar"+it.toString(), Toast.LENGTH_SHORT).show()
+            if(validarFecha(fecha_nacimiento)) {
+                if(contra1.length>6 && contra2.length>6) {
+                    if (contra1 == contra2) {
+                        storage.collection("usuarios").document(correo).set(
+                            hashMapOf("email" to correo, "nombre" to nombre, "telefono" to telefono,
+                                "ciudad" to ciudad, "estado" to estado, "pais" to pais, "fecha nacimiento" to fecha_nacimiento)
+                        ).addOnSuccessListener {
+                            Toast.makeText(this, "Guardado con exito", Toast.LENGTH_SHORT).show()
+                        }.addOnFailureListener{
+                            Toast.makeText(this, "Fallo al guardar"+it.toString(), Toast.LENGTH_SHORT).show()
+                        }
+                        registrarFirebase(correo, contra1)
+                    } else {
+                        Toast.makeText(this, "Las contraseña no coinciden", Toast.LENGTH_SHORT).show()
                     }
-                    registrarFirebase(correo, contra1)
-                } else {
-                    Toast.makeText(this, "Las contraseña no coinciden", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(this, "Las contraseña debe tener por lo menos 6 caracteres", Toast.LENGTH_SHORT).show()
                 }
             }else{
-                Toast.makeText(this, "Las contraseña debe tener por lo menos 6 caracteres", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Fecha de nacimiento invalida", Toast.LENGTH_SHORT).show()
             }
 
         }else{
@@ -112,5 +154,24 @@ class CrearcuentaActivity : AppCompatActivity() {
                     //updateUI(null)
                 }
             }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun validarFecha(fecha: String): Boolean {
+        val dateRegex = Regex("^\\d{2}/\\d{2}/\\d{4}$")
+        if (!dateRegex.matches(fecha)) {
+            return false
+        }
+        val partesFecha = fecha.split("/")
+        val dia = partesFecha[0].toInt()
+        val mes = partesFecha[1].toInt()
+        val anio = partesFecha[2].toInt()
+        val fechaNac = LocalDate.of(anio, mes, dia)
+        if (fechaNac.isAfter(LocalDate.now())) {
+            return false
+        } else {
+            return dia in 1..31 && mes in 1..12 && anio <= 2023
+        }
+
     }
 }

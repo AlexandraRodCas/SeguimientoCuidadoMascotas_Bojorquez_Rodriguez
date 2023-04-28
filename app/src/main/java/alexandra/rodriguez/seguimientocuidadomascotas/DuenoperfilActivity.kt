@@ -39,6 +39,8 @@ class DuenoperfilActivity : AppCompatActivity() {
 
         gridPelis.adapter = adapter
 
+        gridPelis.invalidate()
+
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         btn_back.setOnClickListener {
@@ -47,10 +49,12 @@ class DuenoperfilActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
+        val correo:String = usuario.currentUser?.email.toString()
         storage.collection("mascotas")
-            .whereEqualTo("email", usuario.currentUser?.email)
+            .whereEqualTo("email", usuario.currentUser?.email.toString())
             .get()
             .addOnSuccessListener {
+                mascotasPerfilD.removeLast()
                 it.forEach{
                     var  image:Int = 0
                     if(it.getString("especie").equals("Felino")){
@@ -73,7 +77,7 @@ class DuenoperfilActivity : AppCompatActivity() {
                     }
 
                     var nombre:String = it.getString("nombreMascota").toString()
-                    var edadString = it.getString("fecha nacimiento").toString()
+                    var edadString = it.getString("edad").toString()
 
 
                     var act = Mascota(nombre, image, edadString)
@@ -81,17 +85,18 @@ class DuenoperfilActivity : AppCompatActivity() {
                     mascotasPerfilD.add(act)
 
                 }
-
+                mascotasPerfilD.add(Mascota(" ", R.drawable.nueva, "New Pet"))
 
             }
 
             .addOnFailureListener{
                 Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
             }
-        mascotasPerfilD.add(Mascota(" ", R.drawable.duda, "New Pet"))
+
         mascotasPerfilD.add(Mascota("Timon", R.drawable.timon, "9 años"))
         mascotasPerfilD.add(Mascota("Odin", R.drawable.odin, "6 años"))
         mascotasPerfilD.add(Mascota("Silver", R.drawable.silver, "2 años"))
+        mascotasPerfilD.add(Mascota(" ", R.drawable.nueva, "New Pet"))
 
     }
 
@@ -134,10 +139,11 @@ class DuenoperfilActivity : AppCompatActivity() {
                 intento.putExtra("nombre", mascota.nombre)
                 intento.putExtra("image", mascota.image)
                 intento.putExtra("edad", mascota.edad)
-                contexto!!.startActivity(intento)
                 if(mascota.edad.equals("New Pet")){
                     var intento2 = Intent(contexto, NuevapetActivity::class.java)
                     contexto!!.startActivity(intento2)
+                }else{
+                    contexto!!.startActivity(intento)
                 }
             }
 

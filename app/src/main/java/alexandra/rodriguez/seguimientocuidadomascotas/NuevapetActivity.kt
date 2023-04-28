@@ -33,8 +33,7 @@ class NuevapetActivity : AppCompatActivity() {
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         btn_back.setOnClickListener {
-            var intento = Intent(this, DuenoperfilActivity::class.java)
-            this.startActivity(intento)
+            finish()
         }
     }
 

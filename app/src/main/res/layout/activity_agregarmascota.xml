@@ -103,7 +103,7 @@
                     android:background="@drawable/rounded_corner"
                     android:gravity="center_horizontal"
                     android:paddingTop="10dp"
-                    android:hint="Fecha nacimiento"/>
+                    android:hint="Fecha nació dd/mm/yyyy"/>
 
                 <View
                     android:layout_width="match_parent"

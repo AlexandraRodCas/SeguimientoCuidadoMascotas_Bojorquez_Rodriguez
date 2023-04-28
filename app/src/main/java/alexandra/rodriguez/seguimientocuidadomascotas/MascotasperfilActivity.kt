@@ -24,6 +24,10 @@ class MascotasperfilActivity : AppCompatActivity() {
             val nombreM: TextView = findViewById(R.id.nombreM)
             val edadM: TextView = findViewById(R.id.edadM)
 
+            if(edadM.equals("New Pet")){
+                finish()
+            }
+
             imageM.setImageResource(bundle.getInt("image"))
             nombreM.setText(bundle.getString("nombre").toString())
             edadM.setText(bundle.getString("edad").toString())
