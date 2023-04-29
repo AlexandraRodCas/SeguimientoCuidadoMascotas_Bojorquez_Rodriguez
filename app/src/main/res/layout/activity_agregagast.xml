@@ -51,6 +51,9 @@
 
         </LinearLayout>
     </LinearLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
 
     <ImageView
         android:id="@+id/imageM"
@@ -211,4 +214,7 @@
         android:radius="8dp"
         android:text="Continuar"
         android:textColor="@color/black" />
+
+</ScrollView>
+
 </LinearLayout>
