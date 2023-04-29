@@ -1,30 +1,37 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.login
 
 import alexandra.rodriguez.seguimientocuidadomascotas.DuenoperfilActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
 import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
 class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    lateinit var mGoogleSignInClient: GoogleSignInClient
+    companion object{
+        lateinit var mGoogleSignInClient: GoogleSignInClient
+    }
+
     val RC_SIGN_IN=123
     val COD_LOGOUT=323
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,12 +62,12 @@ class LoginActivity : AppCompatActivity() {
             et_contra.setText("")
         }
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
         sign_in_google.setOnClickListener {
-            val signInIntent = mGoogleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
+            signIn()
         }
     }
 
@@ -112,55 +119,58 @@ class LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
-
-        if(requestCode == COD_LOGOUT){
-            signOut()
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+            }
         }
     }
 
     override fun onStart() {
         super.onStart()
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-        updateUI(account)
-    }
-
-    private fun signOut() {
-        mGoogleSignInClient.signOut()
-            .addOnCompleteListener(this) {
-                Toast.makeText(this, "sesión terminada", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account = completedTask.getResult(ApiException::class.java)
-
-            // Signed in successfully, show authenticated UI.
-            updateUI(account)
-        } catch (e: ApiException) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            //Log.w(TAG, "signInResult:failed code=" + e.statusCode)
-            updateUI(null)
+        // Check if user is signed in (non-null) and update UI accordingly.
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser: FirebaseUser? = auth.currentUser
+        if(currentUser != null) {
+            updateUI(currentUser)
         }
     }
 
-    private fun updateUI(account: GoogleSignInAccount?) {
-        if(account!=null){
+    private fun signIn() {
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this,
+                OnCompleteListener<AuthResult?> { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        val intent = Intent(this, DuenoperfilActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        val user: FirebaseUser? = auth.currentUser
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        updateUI(null)
+                    }
+                })
+    }
+    private fun updateUI(user: FirebaseUser?) {
+        var user = auth.currentUser
+        if (user != null){
             val intent = Intent(this, DuenoperfilActivity::class.java)
-            intent.putExtra("name", account.displayName)
-            intent.putExtra("email", account.email)
-            startActivityForResult(intent, COD_LOGOUT)
+            startActivity(intent)
+            finish()
         }
 
     }

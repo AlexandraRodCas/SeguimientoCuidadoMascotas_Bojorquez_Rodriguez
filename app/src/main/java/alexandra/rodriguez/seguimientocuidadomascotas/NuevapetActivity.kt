@@ -33,6 +33,8 @@ class NuevapetActivity : AppCompatActivity() {
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         btn_back.setOnClickListener {
+            val intent = Intent(this, DuenoperfilActivity::class.java)
+            startActivity(intent)
             finish()
         }
     }
@@ -83,6 +85,7 @@ class NuevapetActivity : AppCompatActivity() {
                 intento.putExtra("image", mascota.image)
                 intento.putExtra("especie", mascota.nombre)
                 contexto!!.startActivity(intento)
+
             }
 
             return vista

@@ -1,5 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
+import alexandra.rodriguez.seguimientocuidadomascotas.login.LoginActivity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -81,6 +82,8 @@ class AgregarmascotaActivity : AppCompatActivity() {
         }
 
         btn_back.setOnClickListener {
+            val intent = Intent(this, NuevapetActivity::class.java)
+            startActivity(intent)
             finish()
         }
         btn_continuar.setOnClickListener {
@@ -134,12 +137,14 @@ class AgregarmascotaActivity : AppCompatActivity() {
                         .addOnSuccessListener {
                             Toast.makeText(this, "Mascota agregada", Toast.LENGTH_SHORT).show()
                             if (bundle != null) {
-                                var mascota = Mascota(nombre_mas, bundle.getInt("image"), fechana)
-                                DuenoperfilActivity.mascotasPerfilD.add(mascota)
+                                DuenoperfilActivity.mascotasPerfilD.remove(Mascota(" ", R.drawable.nueva, "New Pet"))
+                                var act = Mascota(nombre_mas, bundle.getInt("image"), calcularEdad(fechana))
+                                DuenoperfilActivity.mascotasPerfilD.add(act)
+                                DuenoperfilActivity.mascotasPerfilD.add(Mascota(" ", R.drawable.nueva, "New Pet"))
+                                val intent = Intent(this, DuenoperfilActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
-
-                        }.addOnSuccessListener {
-                            Toast.makeText(this, "Guardado con exito", Toast.LENGTH_SHORT).show()
                         }.addOnFailureListener {
                             Toast.makeText(
                                 this,
@@ -147,8 +152,7 @@ class AgregarmascotaActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-                    var intento = Intent(this, DuenoperfilActivity::class.java)
-                    this.startActivity(intento)
+
                 }else{
                     Toast.makeText(this, "Fecha de nacimiento invalida", Toast.LENGTH_SHORT).show()
                 }

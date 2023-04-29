@@ -1,20 +1,22 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
+import alexandra.rodriguez.seguimientocuidadomascotas.login.LoginActivity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DuenoperfilActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseFirestore
     private lateinit var usuario: FirebaseAuth
+    private lateinit var correo: String
     var adapter: AdaptadorMascotas? =null
 
     companion object{
@@ -25,36 +27,48 @@ class DuenoperfilActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_duenoperfil)
-        adapter = AdaptadorMascotas(this, mascotasPerfilD)
 
         storage = FirebaseFirestore.getInstance()
         usuario = FirebaseAuth.getInstance()
+        correo = usuario.currentUser?.email.toString()
 
         if(first){
             cargarBotones()
             first = false
         }
 
-        var gridPelis: GridView = findViewById(R.id.mascotas)
-
-        gridPelis.adapter = adapter
-
-        gridPelis.invalidate()
 
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         btn_back.setOnClickListener {
+            first = true
+            mascotasPerfilD.clear()
+            FirebaseAuth.getInstance().signOut()
+            if (LoginActivity.mGoogleSignInClient != null) {
+                logout()
+            }
+
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(this, "Sesión terminada", Toast.LENGTH_SHORT).show()
             finish()
         }
-    }
+        adapter = AdaptadorMascotas(this, mascotasPerfilD)
 
+        var gridPelis: GridView = findViewById(R.id.mascotas)
+
+        gridPelis.adapter = adapter
+    }
+    private fun logout() {
+        LoginActivity.mGoogleSignInClient.signOut()
+    }
     fun cargarBotones(){
-        val correo:String = usuario.currentUser?.email.toString()
+        Log.d("CORREO", correo)
         storage.collection("mascotas")
-            .whereEqualTo("email", usuario.currentUser?.email.toString())
+            .whereEqualTo("email", correo)
             .get()
             .addOnSuccessListener {
-                mascotasPerfilD.removeLast()
+                mascotasPerfilD.remove(Mascota(" ", R.drawable.nueva, "New Pet"))
                 it.forEach{
                     var  image:Int = 0
                     if(it.getString("especie").equals("Felino")){
@@ -86,7 +100,10 @@ class DuenoperfilActivity : AppCompatActivity() {
 
                 }
                 mascotasPerfilD.add(Mascota(" ", R.drawable.nueva, "New Pet"))
+                adapter = AdaptadorMascotas(this, mascotasPerfilD)
+                var gridPelis: GridView = findViewById(R.id.mascotas)
 
+                gridPelis.adapter = adapter
             }
 
             .addOnFailureListener{
@@ -142,6 +159,7 @@ class DuenoperfilActivity : AppCompatActivity() {
                 if(mascota.edad.equals("New Pet")){
                     var intento2 = Intent(contexto, NuevapetActivity::class.java)
                     contexto!!.startActivity(intento2)
+
                 }else{
                     contexto!!.startActivity(intento)
                 }
