@@ -31,27 +31,16 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/campo1"
-            android:layout_width="165dp"
+        <NumberPicker
+            android:id="@+id/numberPickerD"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="35dp"
-            android:layout_marginLeft="5dp"
-            android:hint="100"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-        <EditText
-            android:id="@+id/campo2"
-            android:layout_width="165dp"
+            android:layout_marginHorizontal="50dp" />
+        <NumberPicker
+            android:id="@+id/numberPickerU"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="35dp"
-            android:hint="0"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:layout_marginHorizontal="50dp" />
 
     </LinearLayout>
 

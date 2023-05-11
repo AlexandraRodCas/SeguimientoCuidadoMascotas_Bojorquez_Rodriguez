@@ -1,19 +1,20 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.adapters
 
-import alexandra.rodriguez.seguimientocuidadomascotas.Datos
+import alexandra.rodriguez.seguimientocuidadomascotas.MedicionDatos
 import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.GridView
 import android.widget.TextView
 
-class DatosAdaptador: BaseAdapter {
-    var botones = ArrayList<Datos>()
+class ManualAdaptador : BaseAdapter {
+    var botones = ArrayList<MedicionDatos>()
     var contexto: Context? = null
 
-    constructor(contexto: Context, productos:ArrayList<Datos>){
+    constructor(contexto: Context, productos: ArrayList<MedicionDatos>) {
         this.botones = productos
         this.contexto = contexto
     }
@@ -31,15 +32,17 @@ class DatosAdaptador: BaseAdapter {
     }
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        var boton=botones[p0]
-        var inflador= LayoutInflater.from(contexto)
-        var vista = inflador.inflate(R.layout.cell_dato, null)
+        var boton = botones[p0]
+        var inflador = LayoutInflater.from(contexto)
+        var vista = inflador.inflate(R.layout.cell_freccar, null)
 
+        val fecha = vista.findViewById(R.id.fecha) as TextView
+        val gridDatos: GridView = vista.findViewById(R.id.gridDato)
+        var adapter = DatosMAdaptador(vista.context, boton.listaDatos)
 
-        val imagen = vista.findViewById(R.id.icono) as TextView
-        val nombre = vista.findViewById(R.id.item) as TextView
-        nombre.setText(boton.name)
-        imagen.setText(boton.image)
+        gridDatos.adapter = adapter
+
+        fecha.setText(boton.fecha)
 
         return vista
     }

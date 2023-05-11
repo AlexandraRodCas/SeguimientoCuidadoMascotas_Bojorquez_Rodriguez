@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MascotasperfilActivity">
+    tools:context=".inicio.MascotasperfilActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,12 +32,13 @@
             android:textSize="25dp"
             android:textStyle="bold" />
     </LinearLayout>
-    <ImageView
-        android:id="@+id/imageM"
-        android:layout_width="match_parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/my_image_view"
+        android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginVertical="10dp"
-        android:src="@drawable/timon" />
+        android:layout_gravity="center"
+        android:src="@drawable/timon"
+        android:layout_marginTop="30dp" />
     <TextView
         android:id="@+id/nombreM"
         android:layout_width="match_parent"

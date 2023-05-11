@@ -1,7 +1,6 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.login
 
-import alexandra.rodriguez.seguimientocuidadomascotas.DuenoperfilActivity
-import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
+import alexandra.rodriguez.seguimientocuidadomascotas.inicio.DuenoperfilActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Intent
 import android.os.Bundle

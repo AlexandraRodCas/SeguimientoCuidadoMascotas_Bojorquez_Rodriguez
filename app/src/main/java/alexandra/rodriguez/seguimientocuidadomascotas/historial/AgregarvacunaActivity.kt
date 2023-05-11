@@ -3,7 +3,7 @@ package alexandra.rodriguez.seguimientocuidadomascotas.historial
 import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
 import alexandra.rodriguez.seguimientocuidadomascotas.R
 import alexandra.rodriguez.seguimientocuidadomascotas.VacunasMuestra
-import alexandra.rodriguez.seguimientocuidadomascotas.inicio.DuenoperfilActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.historial.VacunasActivity.Companion.listaVacuna
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -18,14 +18,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
-class AgregarpadeActivity : AppCompatActivity() {
+class AgregarvacunaActivity : AppCompatActivity() {
     lateinit var mascota: Mascota
     private lateinit var storage: FirebaseFirestore
     private lateinit var usuario: FirebaseAuth
@@ -33,7 +31,7 @@ class AgregarpadeActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_agregarpade)
+        setContentView(R.layout.activity_agregarvacuna)
 
         storage = FirebaseFirestore.getInstance()
         usuario = FirebaseAuth.getInstance()
@@ -41,7 +39,7 @@ class AgregarpadeActivity : AppCompatActivity() {
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
         val btn_continuar: Button = findViewById(R.id.btn_continuar) as Button
 
-        val editText = findViewById<EditText>(R.id.et_fechaInicio)
+        val editText = findViewById<EditText>(R.id.et_fecha)
         editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
 
         editText.addTextChangedListener(object : TextWatcher {
@@ -69,7 +67,6 @@ class AgregarpadeActivity : AppCompatActivity() {
             }
         })
 
-
         val bundle = intent.extras
         if(bundle != null){
 
@@ -78,51 +75,50 @@ class AgregarpadeActivity : AppCompatActivity() {
             mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), imagenUri, bundle.getString("edad").toString() )        }
 
         btn_back.setOnClickListener {
-            var intento = Intent(this, PadecimientosActivity::class.java)
+            var intento = Intent(this, VacunasActivity::class.java)
             intento.putExtra("nombre",  mascota.nombre)
             intento.putExtra("image",  mascota.image)
             intento.putExtra("edad", mascota.edad)
-            intento.putExtra("uri", mascota.imageUri.toString())
+            intent.putExtra("uri", mascota.imageUri.toString())
             this.startActivity(intento)
             finish()
         }
 
         btn_continuar.setOnClickListener {
-            val et_padecimiento: EditText = findViewById(R.id.et_enfermedad)
-            val et_fechaInicio: EditText = findViewById(R.id.et_fechaInicio)
-            //val et_fechaFin: EditText = findViewById(R.id.et_fechaFin)
-            val et_tratamiento: EditText = findViewById(R.id.et_tratamiento)
-            val et_notas: EditText = findViewById(R.id.et_notas)
+            val et_vacuna: EditText = this.findViewById(R.id.et_vacuna)
+            val et_fecha: EditText = this.findViewById(R.id.et_fecha)
+            val et_dosis: EditText = this.findViewById(R.id.et_dosis)
+            val et_lote: EditText = this.findViewById(R.id.et_lote)
 
-            val padecimiento: String = et_padecimiento.text.toString()
-            val fechaInicio: String = et_fechaInicio.text.toString()
-            //val fechaFin: String = et_fechaFin.text.toString()
-            val tratamiento: String = et_tratamiento.text.toString()
-            val notas: String = et_notas.text.toString()
+            val vacuna: String = et_vacuna.text.toString()
+            val fecha: String = et_fecha.text.toString()
+            val dosis: String = et_dosis.text.toString()
+            val lote: String = et_lote.text.toString()
 
             val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val outputFormat = SimpleDateFormat("dd 'de' MMMM 'de' yyyy", Locale.getDefault())
-            val date = inputFormat.parse(fechaInicio)
+            val date = inputFormat.parse(fecha)
 
-            if(!padecimiento.isNullOrBlank() && !fechaInicio.isNullOrBlank() && !tratamiento.isNullOrBlank() &&
-                !notas.isNullOrBlank()){
-                if (validarFechaA(fechaInicio)) {
+            if(!vacuna.isNullOrBlank() && !fecha.isNullOrBlank() && !dosis.isNullOrBlank() &&
+                !lote.isNullOrBlank()){
+                if (validarFechaA(fecha)) {
                     val actividad = hashMapOf(
-                        "padecimiento" to padecimiento,
-                        "fechaInicio" to outputFormat.format(date),
-                        "tratamiento" to tratamiento,
-                        "notas" to notas,
+                        "vacuna" to vacuna,
+                        "fecha" to outputFormat.format(date),
+                        "dosis" to dosis,
+                        "lote" to lote,
                         "mascota" to mascota.nombre,
                         "email" to usuario.currentUser?.email.toString()
                     )
 
-                    storage.collection("padecimiento")
+
+                    storage.collection("vacuna")
                         .add(actividad)
                         .addOnSuccessListener {
-                            Toast.makeText(this, "padecimiento agregada", Toast.LENGTH_SHORT).show()
-                            var act = VacunasMuestra(padecimiento, R.drawable.padecimientos,outputFormat.format(date), mascota)
-                            PadecimientosActivity.listaPade.add(act)
-                            val intent = Intent(this, PadecimientosActivity::class.java)
+                            Toast.makeText(this, "Vacuna agregada", Toast.LENGTH_SHORT).show()
+                            var act = VacunasMuestra(vacuna, R.drawable.vacuna_icono,fecha, mascota)
+                            listaVacuna.add(act)
+                            val intent = Intent(this, VacunasActivity::class.java)
                             intent.putExtra("nombre",  mascota.nombre)
                             intent.putExtra("image",  mascota.image)
                             intent.putExtra("edad", mascota.edad)
@@ -157,6 +153,5 @@ class AgregarpadeActivity : AppCompatActivity() {
         }else{
             return dia in 1..31 && mes in 1..12 && anio <= 2023
         }
-
     }
 }

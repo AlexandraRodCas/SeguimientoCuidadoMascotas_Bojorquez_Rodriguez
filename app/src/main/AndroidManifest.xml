@@ -12,19 +12,17 @@
         android:theme="@style/Theme.SeguimientoCuidadoMascotas"
         tools:targetApi="31">
         <activity
-            android:name=".AgregarvacunaActivity"
+            android:name=".historial.AgregarvacunaActivity"
             android:exported="false" />
         <activity
-            android:name=".AgregarenfermedadActivity"
+            android:name=".historial.AgregarenfermedadActivity"
             android:exported="false" />
         <activity
-            android:name=".AgregarmascotaActivity"
+            android:name=".inicio.AgregarmascotaActivity"
             android:exported="false" />
+
         <activity
-            android:name=".EspecieActivity"
-            android:exported="false" />
-        <activity
-            android:name=".NuevapetActivity"
+            android:name=".inicio.NuevapetActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
@@ -36,13 +34,13 @@
             android:name=".DesarrolloActivity"
             android:exported="false" />
         <activity
-            android:name=".GaleriaActivity"
+            android:name=".infogen.GaleriaActivity"
             android:exported="false" />
         <activity
             android:name=".CalendarioActivity"
             android:exported="false" />
         <activity
-            android:name=".GastosActivity"
+            android:name=".infogen.GastosActivity"
             android:exported="false" />
         <activity
             android:name=".ChatActivity"
@@ -96,7 +94,7 @@
             android:name=".freccard.CardiacadActivity"
             android:exported="false" />
         <activity
-            android:name=".InfogenActivity"
+            android:name=".infogen.InfogenActivity"
             android:exported="false" />
         <activity
             android:name=".ComportActivity"
@@ -108,10 +106,10 @@
             android:name=".SignosvActivity"
             android:exported="false" />
         <activity
-            android:name=".MascotasperfilActivity"
+            android:name=".inicio.MascotasperfilActivity"
             android:exported="false" />
         <activity
-            android:name=".DuenoperfilActivity"
+            android:name=".inicio.DuenoperfilActivity"
             android:exported="false" />
         <activity
             android:name=".login.NuevacontrasenaActivity"

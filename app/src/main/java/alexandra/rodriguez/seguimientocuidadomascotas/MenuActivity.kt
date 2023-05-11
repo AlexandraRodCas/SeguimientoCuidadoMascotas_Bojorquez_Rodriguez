@@ -1,6 +1,7 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
 import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.GridView
@@ -16,8 +17,9 @@ class MenuActivity : AppCompatActivity() {
         val bundle = intent.extras
 
         if(bundle != null){
-            mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
-        }
+            var imagenS: String = bundle.getString("uri").toString()
+            val imagenUri = Uri.parse(imagenS)
+            mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), imagenUri, bundle.getString("edad").toString() )        }
 
         cargarBotones()
         adapter = BotonesAdaptador(this, botonesMenuInfo)
@@ -28,6 +30,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
+        botonesMenuInfo.add(BotonesMenu("Perfil dueño", R.drawable.crearcuenta, mascota))
         botonesMenuInfo.add(BotonesMenu("Signos vitales", R.drawable.frecuenciacardiaca, mascota))
         botonesMenuInfo.add(BotonesMenu("Frecuencia cardiaca", R.drawable.frecuenciacardiaca, mascota))
         botonesMenuInfo.add(BotonesMenu("Frecuencia respiratoria", R.drawable.frecuenciarespiratoria, mascota))

@@ -1,9 +1,8 @@
-package alexandra.rodriguez.seguimientocuidadomascotas
+package alexandra.rodriguez.seguimientocuidadomascotas.inicio
 
-import alexandra.rodriguez.seguimientocuidadomascotas.login.LoginActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
+import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -20,17 +19,22 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.bumptech.glide.Glide
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import java.io.ByteArrayOutputStream
+import com.google.firebase.storage.StorageReference
+import java.io.File
 import java.time.LocalDate
 import java.time.Period
 
 class AgregarmascotaActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseFirestore
     private lateinit var usuario: FirebaseAuth
+    private lateinit var nombre_mas: String
     private val REQUEST_CODE = 1
     private lateinit var especie: String
+    private var selectedImageUri: Uri = Uri.parse("")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,16 +80,21 @@ class AgregarmascotaActivity : AppCompatActivity() {
             imagen.setImageResource(bundle.getInt("image"))
         }
 
-        imagen.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, REQUEST_CODE)
-        }
-
         btn_back.setOnClickListener {
             val intent = Intent(this, NuevapetActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+        storage = FirebaseFirestore.getInstance()
+        usuario = FirebaseAuth.getInstance()
+
+        imagen.setOnClickListener {
+            if(!usuario.currentUser?.email.isNullOrBlank()){
+                fileUpload()
+            }
+        }
+
         btn_continuar.setOnClickListener {
             val et_nombre_mas: EditText = findViewById(R.id.nombre_mas)
             val et_fechana: EditText = findViewById(R.id.et_fechana_mas)
@@ -98,7 +107,7 @@ class AgregarmascotaActivity : AppCompatActivity() {
             val et_veterinario_mas: EditText = findViewById(R.id.et_veterinario_mas)
             val et_contacto_mas: EditText = findViewById(R.id.et_contacto_mas)
 
-            val nombre_mas: String = et_nombre_mas.text.toString()
+            nombre_mas = et_nombre_mas.text.toString()
             val fechana: String = et_fechana.text.toString()
             val raza_mas: String = et_raza_mas.text.toString()
             val tamaño_mas: String = et_tamaño_mas.text.toString()
@@ -108,15 +117,57 @@ class AgregarmascotaActivity : AppCompatActivity() {
             var historial_mas: String = et_historial_mas.text.toString()
             var veterinario_mas: String = et_veterinario_mas.text.toString()
             var contacto_mas: String = et_contacto_mas.text.toString()
-            storage = FirebaseFirestore.getInstance()
-            usuario = FirebaseAuth.getInstance()
-
-
-            Log.d("IMAGEN", imagen.drawableState.toString())
 
             if(!nombre_mas.isNullOrBlank() && !fechana.isNullOrBlank() && !raza_mas.isNullOrBlank() && !tamaño_mas.isNullOrBlank() && !alergia_mas.isNullOrBlank() &&
                 !señas_mas.isNullOrBlank() && !historial_mas.isNullOrBlank() && !veterinario_mas.isNullOrBlank() && !contacto_mas.isNullOrBlank()){
                 if (validarFecha(fechana)) {
+
+                    if (selectedImageUri != Uri.parse("")) {
+                        uploadImage(selectedImageUri!!, raza_mas, tamaño_mas, alergia_mas,
+                            señas_mas, historial_mas, fechana, veterinario_mas,
+                            contacto_mas)
+                    }else{
+                        Toast.makeText(this, "Agrega una imagen clickeando el icono de la especie", Toast.LENGTH_SHORT).show()
+                    }
+                }else{
+                    Toast.makeText(this, "Fecha de nacimiento invalida", Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(this, "Ingresar datos", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun fileUpload(){
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "*/*"
+
+        startActivityForResult(intent, REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            val fileUri = data?.data
+            //val folder: StorageReference = FirebaseStorage.getInstance().reference.child(usuario.currentUser?.email.toString())
+            //val fileName: StorageReference = folder.child( nombre_mas +" - "+ fileUri?.lastPathSegment)
+            selectedImageUri = fileUri!!
+            val imagen: ImageView = findViewById(R.id.imageM) as ImageView
+            imagen.setImageURI(selectedImageUri)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun uploadImage(imageUri: Uri, raza_mas: String, tamaño_mas: String, alergia_mas: String,
+                            señas_mas: String, historial_mas: String, fechana: String, veterinario_mas: String,
+                            contacto_mas: String) {
+        val folder: StorageReference = FirebaseStorage.getInstance().reference.child(usuario.currentUser?.email.toString())
+        val fileName: StorageReference = folder.child(nombre_mas + " - " + imageUri.lastPathSegment)
+        fileName.putFile(imageUri)
+            .addOnSuccessListener { taskSnapshot ->
+                fileName.downloadUrl.addOnSuccessListener { uri ->
+                    // Guardar la URL de la imagen en Firestore junto con los demás datos de la mascota
                     val actividad = hashMapOf(
                         "nombreMascota" to nombre_mas,
                         "raza" to raza_mas,
@@ -128,19 +179,20 @@ class AgregarmascotaActivity : AppCompatActivity() {
                         "edad" to calcularEdad(fechana),
                         "veterinario" to veterinario_mas,
                         "contatcto" to contacto_mas,
+                        "imagen" to uri.toString(),
                         "email" to usuario.currentUser?.email.toString(),
                         "especie" to especie
                     )
-
                     storage.collection("mascotas")
                         .add(actividad)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Mascota agregada", Toast.LENGTH_SHORT).show()
+                            val bundle = intent.extras
                             if (bundle != null) {
-                                DuenoperfilActivity.mascotasPerfilD.remove(Mascota(" ", R.drawable.nueva, "New Pet"))
-                                var act = Mascota(nombre_mas, bundle.getInt("image"), calcularEdad(fechana))
+                                DuenoperfilActivity.mascotasPerfilD.remove(Mascota(" ", R.drawable.nueva,Uri.EMPTY, "New Pet"))
+                                var act = Mascota(nombre_mas, 0, uri, calcularEdad(fechana))
                                 DuenoperfilActivity.mascotasPerfilD.add(act)
-                                DuenoperfilActivity.mascotasPerfilD.add(Mascota(" ", R.drawable.nueva, "New Pet"))
+                                DuenoperfilActivity.mascotasPerfilD.add(Mascota(" ", R.drawable.nueva,Uri.EMPTY, "New Pet"))
                                 val intent = Intent(this, DuenoperfilActivity::class.java)
                                 startActivity(intent)
                                 finish()
@@ -152,31 +204,9 @@ class AgregarmascotaActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-
-                }else{
-                    Toast.makeText(this, "Fecha de nacimiento invalida", Toast.LENGTH_SHORT).show()
                 }
-            }else{
-                Toast.makeText(this, "Ingresar datos", Toast.LENGTH_SHORT).show()
             }
-
-
-
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            val imageUri: Uri? = data?.data
-            // Utiliza la imagen seleccionada
-            val imagen: ImageView = findViewById(R.id.imageM) as ImageView
-            Glide.with(this)
-                .load(imageUri)
-                .into(imagen)
-        }
-
+            .addOnFailureListener { /*...*/ }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

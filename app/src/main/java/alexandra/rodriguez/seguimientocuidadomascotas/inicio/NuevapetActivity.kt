@@ -1,7 +1,10 @@
-package alexandra.rodriguez.seguimientocuidadomascotas
+package alexandra.rodriguez.seguimientocuidadomascotas.inicio
 
+import alexandra.rodriguez.seguimientocuidadomascotas.Mascota
+import alexandra.rodriguez.seguimientocuidadomascotas.R
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -40,12 +43,12 @@ class NuevapetActivity : AppCompatActivity() {
     }
 
     fun cargarBotones(){
-        mascotasPerfilD.add(Mascota("Canino", R.drawable.dog, ""))
-        mascotasPerfilD.add(Mascota("Felino", R.drawable.cat, ""))
-        mascotasPerfilD.add(Mascota("Ave", R.drawable.bird, ""))
-        mascotasPerfilD.add(Mascota("Pez", R.drawable.pez, ""))
-        mascotasPerfilD.add(Mascota("Reptil", R.drawable.lizard, ""))
-        mascotasPerfilD.add(Mascota("Insecto", R.drawable.insecto, ""))
+        mascotasPerfilD.add(Mascota("Canino", R.drawable.dog, Uri.EMPTY,""))
+        mascotasPerfilD.add(Mascota("Felino", R.drawable.cat, Uri.EMPTY,""))
+        mascotasPerfilD.add(Mascota("Ave", R.drawable.bird, Uri.EMPTY,""))
+        mascotasPerfilD.add(Mascota("Pez", R.drawable.pez, Uri.EMPTY,""))
+        mascotasPerfilD.add(Mascota("Reptil", R.drawable.lizard, Uri.EMPTY,""))
+        mascotasPerfilD.add(Mascota("Insecto", R.drawable.insecto, Uri.EMPTY,""))
     }
 
     class AdaptadorMascotas: BaseAdapter {

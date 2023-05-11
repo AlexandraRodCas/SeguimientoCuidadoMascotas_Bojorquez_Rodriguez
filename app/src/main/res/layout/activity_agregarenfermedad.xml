@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AgregarenfermedadActivity">
+    tools:context=".historial.AgregarenfermedadActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,173 +27,158 @@
             android:gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="70dp"
-            android:text="Padecimientos"
+            android:text="Enfermedad"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageM"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginVertical="10dp"
-        android:layout_gravity="center"
-        android:padding="20dp"
-        android:background="@drawable/circle_background_especie"
-        android:src="@drawable/enfermedades" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_menu"
-        android:layout_marginBottom="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="30dp">
-
-        <EditText
-            android:id="@+id/et_correo_telefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rounded_menu"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:hint="Nombre enfermedad"/>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/rosaPastel" />
-    </LinearLayout>
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/Salmon" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_menu"
-        android:paddingBottom="15dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp">
-        <EditText
-            android:id="@+id/et_nombre"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rounded_menu"
-            android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:hint="Fecha inicio"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/rosaPastel" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageM"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginVertical="10dp"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:background="@drawable/circle_background_especie"
+                android:src="@drawable/enfermedades" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_menu"
-        android:paddingBottom="15dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_menu"
+                android:layout_marginBottom="15dp"
+                android:paddingBottom="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="30dp">
 
-        <EditText
-            android:id="@+id/et_telefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rounded_menu"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:hint="Fecha fin"
-            android:inputType="phone"
-            android:paddingTop="10dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/rosaPastel" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_menu"
-        android:paddingBottom="15dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/et_ciudad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/rounded_menu"
-            android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:hint="Tratamiento"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/rosaPastel" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_menu"
-        android:paddingBottom="15dp"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="20dp">
-
-        <EditText
-            android:id="@+id/et_estado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_menu"
-            android:ems="10"
-            android:gravity="center_horizontal"
-            android:hint="Notas"
-            android:inputType="text"
-            android:paddingTop="10dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginHorizontal="15dp"
-            android:background="@color/rosaPastel" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/et_enfermedad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/rounded_menu"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="10dp"
+                    android:hint="Nombre enfermedad"/>
 
 
-    <Button
-        android:id="@+id/btn_continuar"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/azulPastel"
-        android:radius="8dp"
-        android:text="Continuar"
-        android:textColor="@color/black" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@color/rosaPastel" />
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/Salmon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_menu"
+                android:paddingBottom="15dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp">
+                <EditText
+                    android:id="@+id/et_fechaInicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/rounded_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="10dp"
+                    android:hint="Fecha inicio"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@color/rosaPastel" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_menu"
+                android:paddingBottom="15dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/et_tratamiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/rounded_menu"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="10dp"
+                    android:hint="Tratamiento"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@color/rosaPastel" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_menu"
+                android:paddingBottom="15dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/et_notas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_menu"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:hint="Notas"
+                    android:inputType="text"
+                    android:paddingTop="10dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@color/rosaPastel" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_continuar"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/azulPastel"
+                android:radius="8dp"
+                android:text="Continuar"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </LinearLayout>

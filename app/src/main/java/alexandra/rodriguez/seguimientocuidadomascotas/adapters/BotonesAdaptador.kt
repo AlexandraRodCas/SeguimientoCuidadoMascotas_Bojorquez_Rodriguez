@@ -6,6 +6,10 @@ import alexandra.rodriguez.seguimientocuidadomascotas.frecres.RespiradActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.historial.EnfermedadesActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.historial.PadecimientosActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.historial.VacunasActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.infogen.GaleriaActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.infogen.GastosActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.infogen.InfogenActivity
+import alexandra.rodriguez.seguimientocuidadomascotas.inicio.DuenoperfilActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.pesito.PesodActivity
 import alexandra.rodriguez.seguimientocuidadomascotas.temp.TemperaturadActivity
 import android.content.Context
@@ -53,13 +57,17 @@ class BotonesAdaptador: BaseAdapter {
         nombre.setText(boton.name)
 
         shape.setOnClickListener{
-            Log.d("BOTON", boton.name.toString())
+            if(boton.name.equals("Perfil dueño")){
+                var intento = Intent(contexto, DuenoperfilActivity::class.java)
+                contexto!!.startActivity(intento)
+            }
 
             if(boton.name.equals("Signos vitales")){
                 var intento = Intent(contexto, SignosvActivity::class.java)
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
             if(boton.name.equals("Comportamiento")){
@@ -67,6 +75,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
             if(boton.name.equals("Historial Clinico")){
@@ -74,6 +83,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
             if(boton.name.equals("Información General")){
@@ -81,6 +91,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -89,6 +100,7 @@ class BotonesAdaptador: BaseAdapter {
                 intentoC.putExtra("nombre",  boton.mascota.nombre)
                 intentoC.putExtra("image",  boton.mascota.image)
                 intentoC.putExtra("edad", boton.mascota.edad)
+                intentoC.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intentoC)
             }
             if(boton.name.equals("Frecuencia respiratoria")){
@@ -96,6 +108,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
             if(boton.name.equals("Temperatura")){
@@ -103,6 +116,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
             if(boton.name.equals("Peso")){
@@ -110,6 +124,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -118,6 +133,7 @@ class BotonesAdaptador: BaseAdapter {
                 intentoC.putExtra("nombre",  boton.mascota.nombre)
                 intentoC.putExtra("image",  boton.mascota.image)
                 intentoC.putExtra("edad", boton.mascota.edad)
+                intentoC.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intentoC)
             }
             if(boton.name.equals("Padecimientos")){
@@ -125,6 +141,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
             if(boton.name.equals("Enfermedades")){
@@ -132,6 +149,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -140,6 +158,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -148,6 +167,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.imageUri.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -156,6 +176,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -164,6 +185,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.toString())
                 contexto!!.startActivity(intento)
             }
 
@@ -172,6 +194,7 @@ class BotonesAdaptador: BaseAdapter {
                 intento.putExtra("nombre",  boton.mascota.nombre)
                 intento.putExtra("image",  boton.mascota.image)
                 intento.putExtra("edad", boton.mascota.edad)
+                intento.putExtra("uri", boton.mascota.toString())
                 contexto!!.startActivity(intento)
             }
         }

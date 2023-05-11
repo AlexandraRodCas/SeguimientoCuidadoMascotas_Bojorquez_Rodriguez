@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/image_cell"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/my_image_view"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_gravity="center"
         android:src="@drawable/timon"
-        android:layout_marginTop="30dp"
-        android:scaleType="fitXY"/>
+        android:layout_marginTop="30dp" />
     <TextView
         android:id="@+id/mascota_nombre_cell"
         android:layout_width="wrap_content"

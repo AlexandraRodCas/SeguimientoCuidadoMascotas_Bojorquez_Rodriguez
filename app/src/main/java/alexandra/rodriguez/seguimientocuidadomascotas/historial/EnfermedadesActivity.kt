@@ -1,31 +1,46 @@
 package alexandra.rodriguez.seguimientocuidadomascotas.historial
 
 import alexandra.rodriguez.seguimientocuidadomascotas.*
+import alexandra.rodriguez.seguimientocuidadomascotas.adapters.VacunasAdaptador
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class EnfermedadesActivity : AppCompatActivity() {
-    var botonesMenuV=ArrayList<VacunasMuestra>()
     var adapter: AdaptadorEnfermedades? =null
     lateinit var mascota: Mascota
-
+    private lateinit var storage: FirebaseFirestore
+    private lateinit var usuario: FirebaseAuth
+    private lateinit var correo: String
+    companion object{
+        var botonesMenuV = ArrayList<VacunasMuestra>()
+        var first = true
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        storage = FirebaseFirestore.getInstance()
+        usuario = FirebaseAuth.getInstance()
+        correo = usuario.currentUser?.email.toString()
+
         setContentView(R.layout.activity_enfermedades)
         val bundle = intent.extras
-
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
         val btn_añadir: Button = findViewById(R.id.btn_añadir) as Button
 
         if(bundle != null){
 
-            val imageM: ImageView = findViewById(R.id.imageM)
+            val imageM: de.hdodenhof.circleimageview.CircleImageView = findViewById(R.id.my_image_view)
             val nombreM: TextView = findViewById(R.id.nombreM)
             val edadM: TextView = findViewById(R.id.edadM)
 
@@ -33,50 +48,73 @@ class EnfermedadesActivity : AppCompatActivity() {
             nombreM.setText(bundle.getString("nombre").toString())
             edadM.setText(bundle.getString("edad").toString())
 
-            mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
+            var imagenS: String = bundle.getString("uri").toString()
+            val imagenUri = Uri.parse(imagenS)
+            mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), imagenUri, bundle.getString("edad").toString() )
+            if (mascota.imageUri.toString() != "") {
+                Glide.with(this)
+                    .load(mascota.imageUri)
+                    .into(imageM)
+            } else {
+                imageM.setImageResource(mascota.image)
+            }
         }
 
-        cargarBotones()
-        adapter = AdaptadorEnfermedades(this, botonesMenuV)
-
-        var gridBotones: GridView = findViewById(R.id.mascotasVacunas) as GridView
-
-        gridBotones.adapter = adapter
+        if(first){
+            cargarBotones()
+            first = false
+        }
 
         btn_back.setOnClickListener {
+            first = true
             var intento = Intent(this, HistorialcActivity::class.java)
             intento.putExtra("nombre",  mascota.nombre)
             intento.putExtra("image",  mascota.image)
             intento.putExtra("edad", mascota.edad)
+            intento.putExtra("uri", mascota.imageUri.toString())
             this.startActivity(intento)
+            finish()
         }
 
         btn_añadir.setOnClickListener {
-            var intento = Intent(this, AgregarvacunaActivity::class.java)
+            first = true
+            var intento = Intent(this, AgregarenfermedadActivity::class.java)
             intento.putExtra("nombre",  mascota.nombre)
             intento.putExtra("image",  mascota.image)
             intento.putExtra("edad", mascota.edad)
+            intento.putExtra("uri", mascota.imageUri.toString())
             this.startActivity(intento)
+            finish()
         }
     }
 
     fun cargarBotones(){
-        botonesMenuV.add(
-            VacunasMuestra("Conjuntivitis",
-            R.drawable.enfermedades,"27 febrero 2023 - 10 marzo 2014", mascota)
-        )
-        botonesMenuV.add(
-            VacunasMuestra("Diarrea",
-            R.drawable.enfermedades,"20 enero 2023 - 22 enero 2014", mascota)
-        )
-        botonesMenuV.add(
-            VacunasMuestra("Alergia cutanea",
-            R.drawable.enfermedades,"10 octubre 2022 - 15 octubre 2014", mascota)
-        )
-        botonesMenuV.add(
-            VacunasMuestra("Intoxicación alimentaria",
-            R.drawable.enfermedades,"20 agosto 2022 - 22 agosto 2014", mascota)
-        )
+        botonesMenuV = ArrayList()
+        storage.collection("enfermedad")
+            .whereEqualTo("email", correo)
+            .whereEqualTo("mascota", mascota.nombre)
+            .get()
+            .addOnSuccessListener {
+                it.forEach{
+
+                    var enfermedad: String = it.getString("enfermedad").toString()
+                    var fecha:String = it.getString("fechaInicio").toString()
+
+                    botonesMenuV.add(VacunasMuestra(enfermedad, R.drawable.enfermedades,fecha, mascota))
+                }
+
+                adapter = AdaptadorEnfermedades(this, botonesMenuV)
+                Log.d("LISTA", botonesMenuV.size.toString())
+
+                var gridBotones: GridView = findViewById(R.id.mascotasEnfermedades) as GridView
+
+                gridBotones.adapter = adapter
+
+
+            }.addOnFailureListener{
+                Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()
+            }
+
     }
 
     class AdaptadorEnfermedades: BaseAdapter {

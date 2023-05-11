@@ -1,8 +1,9 @@
 package alexandra.rodriguez.seguimientocuidadomascotas
 
-import alexandra.rodriguez.seguimientocuidadomascotas.adapters.BotonesAdaptador
+import alexandra.rodriguez.seguimientocuidadomascotas.infogen.InfogenActivity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,8 +26,9 @@ class VeterinariaActivity : AppCompatActivity() {
         val btn_back: ImageView = findViewById(R.id.back) as ImageView
 
         if(bundle != null){
-            mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), bundle.getString("edad").toString() )
-        }
+            var imagenS: String = bundle.getString("uri").toString()
+            val imagenUri = Uri.parse(imagenS)
+            mascota = Mascota(bundle.getString("nombre").toString(), bundle.getInt("image"), imagenUri, bundle.getString("edad").toString() )        }
 
         cargarBotones()
         adapter = VeterinariasAdaptador(this, botonesMenuInfo)
@@ -40,7 +42,9 @@ class VeterinariaActivity : AppCompatActivity() {
             intento.putExtra("nombre",  mascota.nombre)
             intento.putExtra("image",  mascota.image)
             intento.putExtra("edad", mascota.edad)
+            intento.putExtra("uri", mascota.imageUri.toString())
             this.startActivity(intento)
+            finish()
         }
     }
 
